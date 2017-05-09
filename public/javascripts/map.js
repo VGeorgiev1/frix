@@ -20,6 +20,14 @@ function initMap() {
     //Create the map object.
     map = new google.maps.Map(document.getElementById('map'), options);
 
+    navigator.geolocation.getCurrentPosition((position) => {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        map.setCenter(pos);
+    })
+
     //Listen for any clicks on the map.
     google.maps.event.addListener(map, 'click', function (event) {
         //Get the location that the user clicked.
