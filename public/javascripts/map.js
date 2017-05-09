@@ -26,6 +26,7 @@ function initMap() {
         };
         map.setCenter(pos);
         initMarker(pos);
+        markerLocation();
     })
 
     //Listen for any clicks on the map.
