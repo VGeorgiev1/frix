@@ -53,6 +53,9 @@ module.exports = {
 
     },
     listproblemsGet: (req, res) => {
-        res.json({ message: 'hooray! welcome to our api!' });
+    Problem.find({}).populate('author').then(problems => {
+        res.json(problems);
+
+    })
     }
 };
