@@ -19,13 +19,13 @@ function initMap() {
 
     //Create the map object.
     map = new google.maps.Map(document.getElementById('map'), options);
-
     navigator.geolocation.getCurrentPosition((position) => {
         var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
         map.setCenter(pos);
+        initMarker(pos);
     })
 
     //Listen for any clicks on the map.
@@ -35,20 +35,24 @@ function initMap() {
         //If the marker hasn't been added.
         if (marker === false) {
             //Create the marker.
-            marker = new google.maps.Marker({
-                position: clickedLocation,
-                map: map,
-                draggable: true //make it draggable
-            });
-            //Listen for drag events!
-            google.maps.event.addListener(marker, 'dragend', function (event) {
-                markerLocation();
-            });
+            initMarker(location);
         } else {
             //Marker has already been added, so just change its location.
             marker.setPosition(clickedLocation);
         }
         //Get the marker's location.
+        markerLocation();
+    });
+}
+
+function initMarker(location) {
+    marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        draggable: true //make it draggable
+    });
+    //Listen for drag events!
+    google.maps.event.addListener(marker, 'dragend', function (event) {
         markerLocation();
     });
 }
