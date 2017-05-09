@@ -53,11 +53,11 @@ module.exports = {
 
     },
     probleminfoGet: (req, res) => {
-    Problem.find({}).populate('author').then(problems => {
-        res.json(problems);
-    })
+        Problem.find({}).populate('author').then(problems => {
+            res.json(problems);
+        })
     },
-    listproblemsGet: (req,rss) => {
+    listproblemsGet: (req, res) => {
         res.render('problem/listproblems');
     }
 };
