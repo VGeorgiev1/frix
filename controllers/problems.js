@@ -52,10 +52,12 @@ module.exports = {
         })
 
     },
-    listproblemsGet: (req, res) => {
+    probleminfoGet: (req, res) => {
     Problem.find({}).populate('author').then(problems => {
         res.json(problems);
-
     })
+    },
+    listproblemsGet: (req,rss) => {
+        res.render('problem/listproblems');
     }
 };
