@@ -3394,7 +3394,7 @@ jQuery.support = (function( support ) {
 	// Tests for enctype support on a form (#6743)
 	support.enctype = !!document.createElement("form").enctype;
 
-	// Makes sure cloning an html5 element does not cause problems
+	// Makes sure cloning an html5 element does not cause problem
 	// Where outerHTML is undefined, this still works
 	support.html5Clone = document.createElement("nav").cloneNode( true ).outerHTML !== "<:nav></:nav>";
 

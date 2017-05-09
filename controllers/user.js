@@ -1,4 +1,6 @@
 const User = require('mongoose').model('User');
+
+
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
@@ -28,7 +30,8 @@ module.exports = {
                     email: registerArgs.email,
                     passwordHash: passwordHash,
                     fullName: registerArgs.fullName,
-                    salt: salt
+                    salt: salt,
+
                 };
 
                 User.create(userObject).then(user => {
