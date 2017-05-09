@@ -35,7 +35,8 @@ module.exports={
             });
         parts.points=0;
         parts.picture=imageName;
-
+        parts.lng=req.body.lng;
+        parts.lat=req.body.lat;
         Problem.create(parts).then(problem => {
                 req.user.problems.push(problem.id);
                 req.user.save(err => {
@@ -49,6 +50,10 @@ module.exports={
                     }
            })
         })
+
+    },
+    listproblems: (req,res)=> {
+            
 
     }
 };
