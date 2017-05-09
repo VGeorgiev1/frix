@@ -6,16 +6,15 @@ module.exports={
         res.render('problem/create');
     },
     createPost: (req,res) => {
-        let problemParts=req.body;
-
+        let parts=req.body;
         let errorMsg='';
         if(!req.isAuthenticated()){
             errorMsg='Sorry you must be logged in!';
         }
-        else if(!problemParts.content){
+        else if(!req.body.description){
             errorMsg='Content is required';
         }
-        else if(!problemParts.files.image){
+        else if(!req.files.image){
             errorMsg='Picture is required';
         }
         if(errorMsg){
@@ -24,19 +23,20 @@ module.exports={
             });
             return;
         }
-        problemParts.author=req.user.id;
+        parts.author=req.user.id;
         let image=req.files.image;
 
             let imageName=image.name;
 
-            image.mv(`./public/images/${imageName}`, err => {
+            image.mv(`./public/${imageName}`, err => {
                 if(err){
                     console.log(err.message);
                 }
             });
-        problemParts.points=0;
+        parts.points=0;
+        parts.picture=imageName;
 
-        Problem.create(problemParts).then(problem => {
+        Problem.create(parts).then(problem => {
                 req.user.problems.push(problem.id);
                 req.user.save(err => {
                     if(err){

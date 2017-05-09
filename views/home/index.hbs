@@ -1,0 +1,22 @@
+<div class="container body-content">
+    <div class="row">
+        {{#each problems}}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h2>{{this.title}}</h2>
+                    </header>
+
+                    <p>{{this.description}}
+                    </p>
+
+                    <small class="author">
+                        {{this.author.fullName}}
+                    </small>
+
+                    <img src="{{this.picture}}">
+                </article>
+            </div>
+        {{/each}}
+    </div>
+</div>
