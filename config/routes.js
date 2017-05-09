@@ -15,6 +15,6 @@ module.exports = (app) => {
     app.get('/problem/create/', problemController.createGet);
     app.post('/problem/create', problemController.createPost);
 
-    arr.get('/problem/listproblems', problemController.listproblems);
+    app.get('/problem/listproblems', problemController.listproblems);
 };
 
