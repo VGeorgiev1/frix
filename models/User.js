@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const encryption = require('./../utilities/encryption');
-const ObjectId=mongoose.Schema.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 let userSchema = mongoose.Schema(
     {
         email: {type: String, required: true, unique: true},
         passwordHash: {type: String, required: true},
         fullName: {type: String, required: true},
         salt: {type: String, required: true},
-        problems: [{type: ObjectId, ref: 'Article'}],
+        problems: [{type: ObjectId, ref: 'Problem'}],
 
     }
 );
