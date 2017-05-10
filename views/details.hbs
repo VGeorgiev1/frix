@@ -6,23 +6,36 @@
         word-wrap: break-word;
     }
 
+    #descBox{
+        border-radius: 25px;
+        border: 2px solid #53AC31;
+        padding: 20px;
+        word-wrap: break-word;
+    }
+
+    #imgur{
+        max-width: 50%;
+    }
 </style>
 
 <div class="container body-content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <article>
                 <header>
-                    <h2>{{title}}</h2>
+                    <h1 class="text-center">{{title}}</h1>
                 </header>
 
-                <p>{{description}}</p>
+                <blockquote class="col-sm-11" id="descBox">
+                    <i>Description:</i>
+                    <p>{{description}}</p>
+                    
+                    <small class="author">
+                            {{author.fullName}}
+                        </small>
 
-                <small class="author">
-                        {{author.fullName}}
-                    </small>
-
-                <img src="/{{picture}}">
+                    <img src="/{{picture}}" id="imgur">
+                </blockquote>
             </article>
         </div>
         
