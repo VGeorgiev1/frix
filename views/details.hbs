@@ -2,7 +2,8 @@
     #commentBox{
         border-radius: 25px;
         border: 2px solid #73AD21;
-        padding: 20px; 
+        padding: 20px;
+        word-wrap: break-word;
     }
 
 </style>
@@ -27,7 +28,7 @@
         
     </div>
     {{#if user}}
-    <div>
+    <div style="margin-bottom:50px;">
         <form method='post'>
             Comment:<br />
             <textarea name='comment' id='comment'></textarea><br />
@@ -38,8 +39,13 @@
     {{/if}}
     {{#each comments}}
         <div class="row" style="margin-top:5px;">
-            <img class="col-sm-1" alt="profile pic">
-            <blockquote class="col-sm-11" id="commentBox"> {{this.text}}</blockquote>
+            <img class="col-sm-1" alt="profile pic" height="70" width="80">
+            <div class="col-sm-11">
+                <blockquote class="col-sm-11" id="commentBox"> 
+                    <b>{{author.fullName}}asd</b><p></p>
+                    {{this.text}}
+                </blockquote>
+            </div>
         </div>
     {{/each}}
 </div>
