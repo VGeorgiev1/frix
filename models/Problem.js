@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const ObjectId=mongoose.Schema.Types.ObjectId;
-
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 let problemSchema = mongoose.Schema({
         title: {type: String, required: true},
@@ -12,6 +11,6 @@ let problemSchema = mongoose.Schema({
         lat: {type: Number},
         lng: {type: Number}
     });
-const Problem=mongoose.model('Prob', problemSchema);
+const Problem = mongoose.model('Prob', problemSchema);
 
 module.exports=Problem;

@@ -1,6 +1,7 @@
 const userController = require('./../controllers/user');
 const homeController = require('./../controllers/home');
 const problemController = require('./../controllers/problems');
+const tagsController = require('./../controllers/tags')
 module.exports = (app) => {
     app.get('/', homeController.index);
 
@@ -18,5 +19,7 @@ module.exports = (app) => {
     app.get('/problem/probleminfo', problemController.probleminfoGet);
 
     app.get('/problem/listproblems', problemController.listproblemsGet);
+
+    app.get('/tags/tagsinfo', tagsController.tagsInfoGet);
 };
 

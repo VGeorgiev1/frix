@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const encryption = require('./../utilities/encryption');
-const ObjectId=mongoose.Schema.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
 let userSchema = mongoose.Schema(
     {
         email: {type: String, required: true, unique: true},

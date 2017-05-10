@@ -54,7 +54,7 @@ module.exports = {
     },
     probleminfoGet: (req, res) => {
         Problem.find({}).populate('author').then(problems => {
-            res.json(problems);
+            res.json(problems); 
         })
     },
     listproblemsGet: (req, res) => {
