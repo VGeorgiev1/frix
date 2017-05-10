@@ -7,6 +7,6 @@ let tagsSchema = mongoose.Schema({
         picture: {type: String}
 });
 
-const Tags = mongoose.model('Tags', problemSchema);
+const Tags = mongoose.model('Tags', tagsSchema);
 
 module.exports = Tags;
