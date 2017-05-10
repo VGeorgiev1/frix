@@ -51,8 +51,8 @@ function markerLocation() {
 
 function generatePopupHTML(problem) {
     return `
-<h1>${problem.title}</h1>
-<p>${problem.description}</p>
+<h1><a href="details/${problem._id}">${problem.title}</a></h1>
+<p>${problem.description.substring(0,7)}...</p>
 <img src='/${problem.picture}'></img>
     `;
 }
