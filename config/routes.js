@@ -24,6 +24,6 @@ module.exports = (app) => {
     app.get('/details/:id', problemController.detailsGet);
     app.post('/details/:id',problemController.detailsPost);
 
-
+    app.get('/user/details', userController.detailsGet);
 };
 
