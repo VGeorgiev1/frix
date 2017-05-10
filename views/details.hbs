@@ -1,3 +1,12 @@
+<style>
+    #commentBox{
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+        padding: 20px; 
+    }
+
+</style>
+
 <div class="container body-content">
     <div class="row">
         <div class="col-md-6">
@@ -28,6 +37,9 @@
     </div>
     {{/if}}
     {{#each comments}}
-        <p>{{this.text}}</p>
+        <div class="row" style="margin-top:5px;">
+            <img class="col-sm-1" alt="profile pic">
+            <blockquote class="col-sm-11" id="commentBox"> {{this.text}}</blockquote>
+        </div>
     {{/each}}
 </div>
