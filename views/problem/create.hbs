@@ -7,9 +7,39 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemTitle">Title</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="title" placeholder="Problem Title" name="title" required >
+                        <input type="text" class="form-control" id="title" placeholder="Problem Title" name="title" required>
                     </div>
                 </div>
+
+                <div id="map"></div>
+                <style type="text/css">
+                    #map {
+                        width: 100%;
+                        height: 500px;
+                    }
+
+                    .hidden {
+                        display: none
+                    }
+                </style>
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
+                <script type="text/javascript" src="/javascripts/map.js"></script>
+
+                <div class="form-group hidden">
+                    <label class="col-sm-4 control-label" for="lat">lat</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="lat" placeholder="lat" name="lat" required>
+                    </div>
+                </div>
+
+                <div class="form-group hidden">
+                    <label class="col-sm-4 control-label" for="lng">lng</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="lng" placeholder="lng" name="lng" required>
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Description</label>
                     <div class="col-sm-6">
@@ -19,7 +49,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Picture:</label>
                     <div class="col-sm-6">
-                        <input class="form-control" id="image" type="file"  name="image">
+                        <input class="form-control" id="image" type="file" name="image">
                     </div>
                 </div>
                 <div class="form-group">

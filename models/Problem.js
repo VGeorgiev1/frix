@@ -9,7 +9,8 @@ let problemSchema = mongoose.Schema({
         points: {type: Number},
         author: {type: ObjectId, required: true, ref: 'User'},
         date: {type: Date, default:Date.now()},
-
+        lat: {type: Number},
+        lng: {type: Number}
     });
 const Problem=mongoose.model('Prob', problemSchema);
 
