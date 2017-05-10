@@ -1,6 +1,6 @@
 const User = require('mongoose').model('User');
 const Problem = require('mongoose').model('Prob');
-
+const Comment=require('mongoose').model('Comment');
 module.exports = {
     createGet: (req, res) => {
         res.render('problem/create');
@@ -63,13 +63,25 @@ module.exports = {
     detailsGet: (req, res)=>{
         let id = req.params.id;
 
-        Problem.findById(id).then(problem => {
+        Problem.findById(id).populate('comments').then(problem => {
             res.render('details', problem);
         });
     },
     detailsPost: (req,res)=> {
 
+        let com={};
+        com.author=req.user.id;
+        com.points=0;
+        com.text=req.body.comment;
+        com.post=req.params.id;
+        Comment.create(com).then(com => {
+           req.user.comments.push(com);
+           Problem.update({_id: req.params.id}, {$push:
+               {
+                   comments: com.id
+               }}).then(res.redirect(`../details/${req.params.id}`));
 
+        });
 
 
     }

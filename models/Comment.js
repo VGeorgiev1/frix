@@ -8,8 +8,9 @@ let commentSchema = mongoose.Schema({
     points: {type: Number},
     author: {type: ObjectId, required: true, ref: 'User'},
     date: {type: Date, default:Date.now()},
+    post: {type: ObjectId, ref: 'Problem'}
 
 });
 const Comment=mongoose.model('Comment', commentSchema);
 
-module.exports=Problem;
+module.exports=Comment;

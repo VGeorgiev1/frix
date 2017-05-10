@@ -17,6 +17,7 @@ module.exports = (config) => {
     require('./../models/User');
     require('./../models/Problem');
     require('./../models/Tags');
+    require('./../models/Comment');
 };
 
 
