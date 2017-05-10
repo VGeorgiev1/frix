@@ -59,5 +59,18 @@ module.exports = {
     },
     listproblemsGet: (req, res) => {
         res.render('problem/listproblems');
+    },
+    detailsGet: (req, res)=>{
+        let id = req.params.id;
+
+        Problem.findById(id).then(problem => {
+            res.render('details', problem);
+        });
+    },
+    detailsPost: (req,res)=> {
+
+
+
+
     }
 };

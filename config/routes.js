@@ -3,6 +3,7 @@ const homeController = require('./../controllers/home');
 const problemController = require('./../controllers/problems');
 const tagsController = require('./../controllers/tags')
 module.exports = (app) => {
+
     app.get('/', homeController.index);
 
     app.get('/user/register', userController.registerGet);
@@ -21,5 +22,10 @@ module.exports = (app) => {
     app.get('/problem/listproblems', problemController.listproblemsGet);
 
     app.get('/tags/tagsinfo', tagsController.tagsInfoGet);
+    
+    app.get('/details/:id', problemController.detailsGet);
+    app.post('/details/:id',problemController.detailsPost);
+
+
 };
 

@@ -1,22 +1,14 @@
-<div class="container body-content">
-    <div class="row">
-        {{#each problems}}
-            <div class="col-md-6">
-                <article>
-                    <header>
-                        <h2>{{this.title}}</h2>
-                    </header>
+<style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
 
-                    <p>{{this.description}}
-                    </p>
-
-                    <small class="author">
-                        {{this.author.fullName}}
-                    </small>
-
-                    <img src="{{this.picture}}">
-                </article>
-            </div>
-        {{/each}}
-    </div>
-</div>
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<div id="map"></div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
+<script type="text/javascript" src="/javascripts/problemsmap.js"></script>
