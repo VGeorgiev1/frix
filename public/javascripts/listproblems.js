@@ -1,6 +1,5 @@
 let problems = [];
 
-
 fetch('/problem/probleminfo')
     .then(x => x.json())
     .then((data) => {
@@ -8,7 +7,7 @@ fetch('/problem/probleminfo')
     })
     .then(initMap)
     .then(() => {
-        problems.forEach(x => initMarker({ lat: x.lat, lng: x.lng }));
+        problems.forEach(x => initMarker(x));
     });
 
 var map;
@@ -22,15 +21,21 @@ function initMap() {
     };
 
     map = new google.maps.Map(document.getElementById('map'), options);
-
-
 }
 
-function initMarker(location) {
-    window.marker = new google.maps.Marker({
-        position: location,
+function initMarker(problem) {
+    let marker = new google.maps.Marker({
+        position: { lat: problem.lat, lng: problem.lng },
         map: map,
         draggable: false
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: generatePopupHTML(problem)
+    });
+
+    marker.addListener('click', function () {
+        infowindow.open(map, marker);
     });
 }
 
@@ -42,4 +47,10 @@ function markerLocation() {
     //Add lat and lng values to a field that we can save.
     document.getElementById('lat').value = currentLocation.lat(); //latitude
     document.getElementById('lng').value = currentLocation.lng(); //longitude
+}
+
+function generatePopupHTML(problem) {
+    return `
+${problem.title}
+    `;
 }
