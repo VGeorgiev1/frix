@@ -4,54 +4,49 @@
 </script>
 <style>
     #commentBox {
-        border-radius: 25px;
+        /*border-radius: 25px;
         border: 2px solid #6495ED;
         padding: 20px;
-        word-wrap: break-word;
+        word-wrap: break-word;*/
+        border-radius: 5px;
+        background-color:#FFF;
+        padding:20px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
     }
-
-    #descBox {
-        border-radius: 25px;
-        border: 2px solid #6495ED;
-        padding: 20px;
-        word-wrap: break-word;
-        margin-bottom: 20px;
-    }
-
     #imgur {
         max-width: 50%;
     }
-
-    #comment {
+    #comment, #descBox{
         width: 92%;
-        padding: 1%;
         font-size: 1.2em;
         border: 8px outset #6495ED;
+        margin-bottom:20px;
+        background-color:#FFF;
+        padding:20px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+        border-radius: 5px;
     }
-
-    #comment::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
-    }
-
-    #comment::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 10px #4682B4;
-        border-radius: 10px;
-    }
-
-    #comment::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: #6495ED;
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-    }
-
-    #comment::-webkit-scrollbar-thumb:hover {
-        background: #6495ED;
-    }
-
     .active {
         background-color: green;
         color: red;
+    }
+    hr{
+        padding: 0;
+        border: none;
+        border-top: medium double #0000CD;
+        color: #0000CD;
+        text-align: center;
+    }
+    hr:after {
+        content: "§";
+        display: inline-block;
+        position: relative;
+        top: -0.7em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
     }
 </style>
 
@@ -63,15 +58,10 @@
                     <tr>
                         <td>
                             <header>
-                                <h2 class="text-center">{{title}}</h2>
+                                <h2 class="text-center" style="font-size:3.4em">{{title}}</h2>
                             </header>
                         </td>
                         <td align="right">
-                            <span id="points">{{points}}</span>
-                            {{#if user}}
-                            <button id="upvote">▲</button>
-                            <button id="downvote">▼</button>
-                            {{/if}}
                         </td>
                     </tr>
                 </table>
@@ -81,10 +71,17 @@
                         <img class="col-sm-1" alt="profile pic" height="70" width="80">
                         <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{fullName}}name</b><br>{{date}}</p>
                     </div>
-                    <p>Description:</p>
+                    <i>Description:</i>
                     <p>{{description}}</p>
 
                     <img src="/{{picture}}" id="imgur">
+                </div>
+                <div style="margin-bottom:20px;">
+                    {{#if user}}
+                    <button id="upvote">▲</button>
+                    <button id="downvote">▼</button>
+                    {{/if}}
+                    <span id="points">{{points}}</span>
                 </div>
             </article>
         </div>
@@ -93,19 +90,25 @@
     {{#if user}}
     <div style="margin-bottom:50px;">
         <form method='post'>
-            Comment:<br />
+            <p style="font-size:2em;">Comment:</p>
             <textarea class="col-l-12" name='comment' id='comment'></textarea><br />
 
             <input type='submit' value='Submit' />
         </form>
     </div>
+    <hr>
+    <p>{{comments.lenght}} comments</p>
     {{/if}} {{#each comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
         <div class="col-sm-11">
             <blockquote class="col-sm-11" id="commentBox">
-                <b>{{author.fullName}}asd</b>
-                <p></p>
+                <div class="row" style="margin-bottom:5px;">
+                    <div class="col-sm-3">
+                         <b>{{author.name}}name</b>
+                    </div>
+                    <div class="col-sm-9"><p style="text-align:right;">{{comment.date}}data</p></div>
+                </div>
                 {{this.text}}
             </blockquote>
         </div>
