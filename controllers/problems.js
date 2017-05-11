@@ -7,12 +7,47 @@ function vote(req, res, amount) {
         res.json("not logged!");
         return;
     }
-    User.update({ _id: req.user.id }, {
-        $push:
-        {
-            pointgiven: req.params.id
-        }
-    }).exec();
+
+    if(amount==-1){
+        User.findById(req.user.id).then(user => {
+            if(user.upvotes.indexOf(req.params.id)> -1){
+                
+                let index=user.upvotes.indexOf(req.params.id);
+                user.upvotes.splice(index,1);
+                user.save(err => {
+                    if(err){
+                        console.log(err.message);
+                    }
+                });
+            }
+        });
+        User.update({ _id: req.user.id }, {
+            $push:
+                {
+                    downvotes: req.params.id
+                }
+        }).exec();
+    }
+    else{
+        User.findById(req.user.id).then(user => {
+            if(user.downvotes.indexOf(req.params.id)> -1){
+                console.log("newe");
+                let index=user.downvotes.indexOf(req.params.id);
+                user.downvotes.splice(index,1);
+                user.save(err => {
+                    if(err){
+                        console.log(err.message);
+                    }
+                });
+            }
+        });
+        User.update({ _id: req.user.id }, {
+            $push:
+                {
+                    upvotes: req.params.id
+                }
+        }).exec();
+    }
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
         res.json(prob.points);
     });
