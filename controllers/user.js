@@ -1,6 +1,5 @@
 const User = require('mongoose').model('User');
 
-
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
@@ -8,10 +7,10 @@ module.exports = {
         res.render('user/register');
     },
 
-    registerPost:(req, res) => {
+    registerPost: (req, res) => {
         let registerArgs = req.body;
 
-        User.findOne({email: registerArgs.email}).then(user => {
+        User.findOne({ email: registerArgs.email }).then(user => {
             let errorMsg = '';
             if (user) {
                 errorMsg = 'User with the same username exists!';
@@ -31,8 +30,7 @@ module.exports = {
                     email: registerArgs.email,
                     passwordHash: passwordHash,
                     fullName: registerArgs.fullName,
-                    salt: salt,
-
+                    salt: salt
                 };
 
                 User.create(userObject).then(user => {
@@ -49,7 +47,7 @@ module.exports = {
             }
         })
     },
-    detailsGet: (req,res) => {
+    detailsGet: (req, res) => {
         res.render('user/details');
 
     },
@@ -60,8 +58,8 @@ module.exports = {
 
     loginPost: (req, res) => {
         let loginArgs = req.body;
-        User.findOne({email: loginArgs.email}).then(user => {
-            if (!user ||!user.authenticate(loginArgs.password)) {
+        User.findOne({ email: loginArgs.email }).then(user => {
+            if (!user || !user.authenticate(loginArgs.password)) {
                 let errorMsg = 'Either username or password is invalid!';
                 loginArgs.error = errorMsg;
                 res.render('user/login', loginArgs);
@@ -71,7 +69,7 @@ module.exports = {
             req.logIn(user, (err) => {
                 if (err) {
                     console.log(err);
-                    res.redirect('/user/login', {error: err.message});
+                    res.redirect('/user/login', { error: err.message });
                     return;
                 }
 
@@ -83,6 +81,27 @@ module.exports = {
     logout: (req, res) => {
         req.logOut();
         res.redirect('/');
+    },
+    settingsGet: (req, res) => {
+        if (req.user === undefined) {
+            res.render('user/login');
+            return;
+        }
+        User.findById(req.user.id).then(user => {
+            res.render('user/settings', { lat: user.lat, lng: user.lng });
+        });
+
+    },
+
+    settingsPost: (req, res) => {
+        if (req.user === undefined) {
+            res.render('user/login');
+            return;
+        }
+        User.findOneAndUpdate({ _id: req.user.id }, { $set: { lat: req.body.lat, lng: req.body.lng } }).exec();
+        User.findById(req.user.id).then(user => {
+            res.render('user/settings', { lat: user.lat, lng: user.lng });
+        });
     }
 
 };

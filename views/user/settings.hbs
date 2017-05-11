@@ -1,0 +1,52 @@
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/user/settings">
+            <fieldset>
+                <div id="map"></div>
+                <style type="text/css">
+                    #map {
+                        width: 70%;
+                        height: 450px;
+                        display: block;
+                        margin: auto;
+                        margin-bottom: 15px;
+                        ;
+                    }
+
+                    .hidden {
+                        display: none
+                    }
+                </style>
+                <div class="form-group hidden">
+                    <label class="col-sm-4 control-label" for="lat">lat</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="lat" placeholder="lat" name="lat" required>
+                    </div>
+                </div>
+                <div class="form-group hidden">
+                    <label class="col-sm-4 control-label" for="lng">lng</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="lng" placeholder="lng" name="lng" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+
+                        <button type="reset" class="btn btn-default">Cancel</button>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
+<script>
+    userLocation = {
+        lat: {{lat}}, 
+        lng: {{lng}}
+    };
+</script>
+<script type="text/javascript" src="/javascripts/map.js"></script>
