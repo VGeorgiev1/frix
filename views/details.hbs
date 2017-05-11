@@ -1,5 +1,5 @@
 <script>
-    id = "{{id }}";
+    id = "{{id}}";
 
 </script>
 <style>
@@ -9,36 +9,42 @@
         padding: 20px;
         word-wrap: break-word;*/
         border-radius: 5px;
-        background-color:#FFF;
-        padding:20px;
+        background-color: #FFF;
+        padding: 20px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
+
     #imgur {
         max-width: 50%;
     }
-    #comment, #descBox{
+
+    #comment,
+    #descBox {
         width: 92%;
         font-size: 1.2em;
         border: 8px outset #6495ED;
-        margin-bottom:20px;
-        background-color:#FFF;
-        padding:20px;
+        margin-bottom: 20px;
+        background-color: #FFF;
+        padding: 20px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
         border-radius: 5px;
     }
+
     .active {
         background-color: green;
         color: red;
     }
-    hr{
+
+    hr {
         padding: 0;
         border: none;
         border-top: medium double #0000CD;
         color: #0000CD;
         text-align: center;
     }
+
     hr:after {
         content: "§";
         display: inline-block;
@@ -46,7 +52,7 @@
         top: -0.7em;
         font-size: 1.5em;
         padding: 0 0.25em;
-        background: white;
+        background: #F8F8F8;
     }
 </style>
 
@@ -69,19 +75,18 @@
                 <div id="descBox">
                     <div class="row">
                         <img class="col-sm-1" alt="profile pic" height="70" width="80">
-                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{fullName}}name</b><br>{{date}}</p>
+                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}name</b><br>{{problem.date}}</p>
                     </div>
                     <i>Description:</i>
-                    <p>{{description}}</p>
+                    <p>{{problem.description}}</p>
 
-                    <img src="/{{picture}}" id="imgur">
+                    <img src="/{{problem.picture}}" id="imgur">
                 </div>
                 <div style="margin-bottom:20px;">
                     {{#if user}}
                     <button id="upvote">▲</button>
-                    <button id="downvote">▼</button>
-                    {{/if}}
-                    <span id="points">{{points}}</span>
+                    <button id="downvote">▼</button> {{/if}}
+                    <span id="points">{{problem.points}}</span>
                 </div>
             </article>
         </div>
@@ -105,9 +110,11 @@
             <blockquote class="col-sm-11" id="commentBox">
                 <div class="row" style="margin-bottom:5px;">
                     <div class="col-sm-3">
-                         <b>{{author.name}}name</b>
+                        <b>{{author.name}}name</b>
                     </div>
-                    <div class="col-sm-9"><p style="text-align:right;">{{comment.date}}data</p></div>
+                    <div class="col-sm-9">
+                        <p style="text-align:right;">{{comment.date}}data</p>
+                    </div>
                 </div>
                 {{this.text}}
             </blockquote>
