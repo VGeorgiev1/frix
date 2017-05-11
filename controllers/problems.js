@@ -96,5 +96,12 @@ module.exports = {
         Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
             res.json(prob.points);
         });
+    },
+    allproblemsGet: (req,res) => {
+        Problem.find({}).sort({points : 'desc'}).then(problems => {
+
+            res.render('problem/allproblems', {problems});
+
+        })
     }
 };
