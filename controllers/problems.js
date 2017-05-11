@@ -95,14 +95,19 @@ module.exports = {
                 points: 1,
             }
         }).exec();
+        Problem.findById(req.params.id).then(problem => {
+            res.json(problem.points);
+        });
     },
     downvote: (req, res) => {
-        console.log('down', req.params.id);
         Problem.update({ _id: req.params.id }, {
             $inc:
             {
                 points: -1,
             }
         }).exec();
+        Problem.findById(req.params.id).then(problem => {
+            res.json(problem.points);
+        });
     }
 };
