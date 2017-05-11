@@ -88,7 +88,6 @@ module.exports = {
 
     },
     upvote: (req, res) => {
-        console.log('up', req.params.id);
         Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
             res.json(prob.points);
         });
