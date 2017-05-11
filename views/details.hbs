@@ -64,7 +64,7 @@
                     <tr>
                         <td>
                             <header>
-                                <h2 class="text-center" style="font-size:3.4em">{{title}}</h2>
+                                <h2 class="text-center" style="font-size:3.4em">{{problem.title}}</h2>
                             </header>
                         </td>
                         <td align="right">
@@ -75,7 +75,7 @@
                 <div id="descBox">
                     <div class="row">
                         <img class="col-sm-1" alt="profile pic" height="70" width="80">
-                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}name</b><br>{{problem.date}}</p>
+                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.date}}</p>
                     </div>
                     <i>Description:</i>
                     <p>{{problem.description}}</p>
@@ -86,7 +86,7 @@
                     {{#if user}}
                     <button id="upvote">▲</button>
                     <button id="downvote">▼</button> {{/if}}
-                    <span id="points">{{problem.points}}</span>
+                    <span id="points">Points:{{problem.points}}</span>
                 </div>
             </article>
         </div>
@@ -101,9 +101,10 @@
             <input type='submit' value='Submit' />
         </form>
     </div>
+    {{/if}} 
     <hr>
     <p>{{comments.lenght}} comments</p>
-    {{/if}} {{#each comments}}
+    {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
         <div class="col-sm-11">
