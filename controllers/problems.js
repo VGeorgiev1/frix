@@ -3,51 +3,6 @@ const Problem = require('mongoose').model('Prob');
 const Comment = require('mongoose').model('Comment');
 
 function vote(req, res, amount) {
-    if (req.user === undefined) {
-        res.json("not logged!");
-        return;
-    }
-
-    if(amount==-1){
-        User.findById(req.user.id).then(user => {
-            if(user.upvotes.indexOf(req.params.id)> -1){
-                
-                let index=user.upvotes.indexOf(req.params.id);
-                user.upvotes.splice(index,1);
-                user.save(err => {
-                    if(err){
-                        console.log(err.message);
-                    }
-                });
-            }
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-                {
-                    downvotes: req.params.id
-                }
-        }).exec();
-    }
-    else{
-        User.findById(req.user.id).then(user => {
-            if(user.downvotes.indexOf(req.params.id)> -1){
-                console.log("newe");
-                let index=user.downvotes.indexOf(req.params.id);
-                user.downvotes.splice(index,1);
-                user.save(err => {
-                    if(err){
-                        console.log(err.message);
-                    }
-                });
-            }
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-                {
-                    upvotes: req.params.id
-                }
-        }).exec();
-    }
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
         res.json(prob.points);
     });
@@ -141,8 +96,62 @@ module.exports = {
     },
 
 
-    upvote: (req, res) => { vote(req, res, 1) },
-    downvote: (req, res) => { vote(req, res, -1) },
+    upvote: (req, res) => {
+        if (req.user === undefined) {
+            res.json("not logged!");
+            return;
+        }
+        User.findById(req.user.id).then(user => {
+            if (user.downvotes.indexOf(req.params.id) > -1) {
+                let index = user.downvotes.indexOf(req.params.id);
+                user.downvotes.splice(index, 1);
+                user.save(err => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                vote(req, res, 2);
+            }
+            else if (user.downvotes.indexOf(req.params.id) === -1 && user.upvotes.indexOf(req.params.id) === -1) {
+                vote(req, res, 1);
+            }
+
+        });
+        User.update({ _id: req.user.id }, {
+            $push:
+            {
+                upvotes: req.params.id
+            }
+        }).exec();
+    },
+    downvote: (req, res) => {
+        if (req.user === undefined) {
+            res.json("not logged!");
+            return;
+        }
+        User.findById(req.user.id).then(user => {
+            if (user.upvotes.indexOf(req.params.id) > -1) {
+                let index = user.upvotes.indexOf(req.params.id);
+                user.upvotes.splice(index, 1);
+                user.save(err => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                vote(req, res, -2);
+            }
+            else if (user.downvotes.indexOf(req.params.id) === -1 && user.upvotes.indexOf(req.params.id) === -1) {
+                vote(req, res, -1);
+            }
+        });
+        User.update({ _id: req.user.id }, {
+            $push:
+            {
+                downvotes: req.params.id
+            }
+        }).exec();
+
+    },
 
     allproblemsGet: (req, res) => {
         Problem.find({}).sort({ points: 'desc' }).then(problems => {
