@@ -207,7 +207,37 @@ module.exports = {
             }
         });
     },
-
+    resetvote: (req, res) => {
+        if (req.user === undefined) {
+            res.json("not logged!");
+            return;
+        }
+        User.findById(req.user.id).then(user => {
+            if (user.downvotes.indexOf(req.params.id) > -1) {
+                let index = user.downvotes.indexOf(req.params.id);
+                user.downvotes.splice(index, 1);
+                user.save(err => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                vote(req, res, 1);
+            }
+            else if (user.upvotes.indexOf(req.params.id) > -1) {
+                let index = user.upvotes.indexOf(req.params.id);
+                user.upvotes.splice(index, 1);
+                user.save(err => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                vote(req, res, -1);
+            }
+            else {
+                vote(req, res, 0);
+            }
+        });
+    },
     allproblemsGet: (req, res) => {
         Problem.find({}).sort({ points: 'desc' }).then(problems => {
 
