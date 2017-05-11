@@ -2,12 +2,10 @@
 
 //Set up some of our variables.
 var map; //Will contain map object.
-var marker = false; ////Has the user plotted their location marker? 
-
+var marker = false;
 //Function called to initialize / create the map.
 //This is called when the page has loaded.
 function initMap() {
-
     //The center location of our map.
     var centerOfMap = new google.maps.LatLng(42.69, 23.32);
 
@@ -19,13 +17,23 @@ function initMap() {
 
     //Create the map object.
     map = new google.maps.Map(document.getElementById('map'), options);
+    if (typeof userLocation != 'undefined') {
+        initMarker(userLocation);
+        map.setCenter(userLocation);
+    }
     navigator.geolocation.getCurrentPosition((position) => {
         var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
-        map.setCenter(pos);
-        initMarker(pos);
+        if (marker == false) {
+            initMarker(pos);
+            map.setCenter(pos);
+        }/*
+        else {
+            marker.setPosition(pos);
+            map.setCenter(pos);
+        }*/
         markerLocation();
     })
 
@@ -36,22 +44,23 @@ function initMap() {
         //If the marker hasn't been added.
         if (marker === false) {
             //Create the marker.
-            initMarker(location);
+            initMarker(clickedLocation);
         } else {
             //Marker has already been added, so just change its location.
             marker.setPosition(clickedLocation);
         }
-        //Get the marker's location.
         markerLocation();
     });
 }
 
 function initMarker(location) {
+    console.log(map);
     marker = new google.maps.Marker({
         position: location,
         map: map,
         draggable: true //make it draggable
     });
+    markerLocation();
     //Listen for drag events!
     google.maps.event.addListener(marker, 'dragend', function (event) {
         markerLocation();
@@ -70,4 +79,4 @@ function markerLocation() {
 
 
 //Load the map when the page has finished loading.
-google.maps.event.addDomListener(window, 'load', initMap);
+initMap();

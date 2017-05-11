@@ -193,9 +193,7 @@ module.exports = {
     },
     allproblemsGet: (req, res) => {
         Problem.find({}).sort({ points: 'desc' }).then(problems => {
-
             res.render('problem/allproblems', { problems });
-
         })
     }
 };
