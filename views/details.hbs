@@ -86,7 +86,7 @@
                     {{#if user}}
                     <button id="upvote">▲</button>
                     <button id="downvote">▼</button> {{/if}}
-                    <span id="points">{{problem.points}}</span>
+                    <span id="points">Points:{{problem.points}}</span>
                 </div>
             </article>
         </div>
@@ -101,9 +101,9 @@
             <input type='submit' value='Submit' />
         </form>
     </div>
+    {{/if}} 
     <hr>
     <p>{{comments.lenght}} comments</p>
-    {{/if}} 
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
