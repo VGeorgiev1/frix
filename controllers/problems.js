@@ -69,10 +69,12 @@ module.exports = {
     },
     detailsGet: (req, res) => {
         let id = req.params.id;
-
         Problem.findById(id).populate('comments').then(problem => {
-            res.render('details', problem);
+            User.findById(problem.author).then(author => {
+                res.render('details', { problem, author });
+            });
         });
+
     },
     detailsPost: (req, res) => {
 
@@ -85,9 +87,9 @@ module.exports = {
             req.user.comments.push(com);
             Problem.update({ _id: req.params.id }, {
                 $push:
-                    {
-                        comments: com.id
-                    }
+                {
+                    comments: com.id
+                }
             }).then(res.redirect(`../details/${req.params.id}`));
 
         });
@@ -121,9 +123,9 @@ module.exports = {
             if (user.upvotes.indexOf(req.params.id) === -1) {
                 User.update({ _id: req.user.id }, {
                     $push:
-                        {
-                            upvotes: req.params.id
-                        }
+                    {
+                        upvotes: req.params.id
+                    }
                 }).exec();
             }
         });
@@ -153,9 +155,9 @@ module.exports = {
             if (user.downvotes.indexOf(req.params.id) === -1) {
                 User.update({ _id: req.user.id }, {
                     $push:
-                        {
-                            downvotes: req.params.id
-                        }
+                    {
+                        downvotes: req.params.id
+                    }
                 }).exec();
             }
         });
