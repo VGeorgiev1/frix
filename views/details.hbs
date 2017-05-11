@@ -5,20 +5,44 @@
 <style>
     #commentBox {
         border-radius: 25px;
-        border: 2px solid #73AD21;
+        border: 2px solid #6495ED;
         padding: 20px;
         word-wrap: break-word;
     }
 
     #descBox {
         border-radius: 25px;
-        border: 2px solid #53AC31;
+        border: 2px solid #6495ED;
         padding: 20px;
         word-wrap: break-word;
+        margin-bottom: 20px;
     }
 
     #imgur {
         max-width: 50%;
+    }
+
+    #comment{
+        width:92%;
+        padding:1%;
+        font-size:1.2em;
+        border:8px outset #6495ED;
+    }
+    #comment::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+    #comment::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 10px #4682B4;
+        border-radius: 10px;
+    }
+    #comment::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #6495ED; 
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    #comment::-webkit-scrollbar-thumb:hover {
+        background: #6495ED;
     }
 </style>
 
@@ -30,7 +54,7 @@
                     <tr>
                         <td>
                             <header>
-                                <h2>{{title}}</h2>
+                                <h2 class="text-center">{{title}}</h2>
                             </header>
                         </td>
                         <td align="right">
@@ -41,10 +65,12 @@
                     </tr>
                 </table>
 
+                <div id="descBox">
+                    <p>Description:</p>
+                    <p>{{description}}</p>
 
-                <p>{{description}}</p>
-
-                <img src="/{{picture}}">
+                    <img src="/{{picture}}" id="imgur">
+                </div>
             </article>
         </div>
 
@@ -53,7 +79,7 @@
     <div style="margin-bottom:50px;">
         <form method='post'>
             Comment:<br />
-            <textarea name='comment' id='comment'></textarea><br />
+            <textarea class="col-l-12" name='comment' id='comment'></textarea><br />
 
             <input type='submit' value='Submit' />
         </form>
