@@ -26,6 +26,7 @@ module.exports = (app) => {
 
     app.post("/upvote/:id", problemController.upvote);
     app.post("/downvote/:id", problemController.downvote);
+    app.post("/resetvote/:id", problemController.resetvote);
 
     app.get("/allproblems", problemController.allproblemsGet);
 };
