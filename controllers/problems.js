@@ -89,12 +89,12 @@ module.exports = {
     },
     upvote: (req, res) => {
 
-        User.update({_id:req.user.id}, {
+        User.update({ _id: req.user.id }, {
             $push:
-                {
-                    pointgiven: req.params.id
-                }
-        });
+            {
+                pointgiven: req.params.id
+            }
+        }).exec();
         Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
 
             res.json(prob.points);
@@ -105,10 +105,10 @@ module.exports = {
             res.json(prob.points);
         });
     },
-    allproblemsGet: (req,res) => {
-        Problem.find({}).sort({points : 'desc'}).then(problems => {
+    allproblemsGet: (req, res) => {
+        Problem.find({}).sort({ points: 'desc' }).then(problems => {
 
-            res.render('problem/allproblems', {problems});
+            res.render('problem/allproblems', { problems });
 
         })
     }
