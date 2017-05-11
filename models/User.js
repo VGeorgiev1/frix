@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const encryption = require('./../utilities/encryption');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+
 let userSchema = mongoose.Schema(
     {
         email: {type: String, required: true, unique: true},
@@ -13,7 +14,8 @@ let userSchema = mongoose.Schema(
         downvotes: [{type: ObjectId, ref:'Problem'}],
         description: {type:String},
         lat: {type:Number},
-        lng: {type: Number}
+        lng: {type: Number},
+        role: {type: ObjectId}
     }
 );
 
@@ -27,8 +29,40 @@ userSchema.method ({
 });
 
 const User = mongoose.model('User', userSchema);
+const Role=require('mongoose').model('Role');
 
 module.exports = User;
+
+module.exports.initialize= () => {
+
+    let email='admin@mysite.com';
+    User.findOne({email: email}).then(admin =>{
+        if(admin){
+            return;
+        }
+        Role.findOne({name: 'Admin'}).then(role => {
+            if(!role)
+            {
+                return;
+            }
+            let salt = encryption.generateSalt();
+            let passwordHash = encryption.hashPassword('admin123456', salt);
+
+            let adminUser={
+                email: email,
+                fullName: 'Admin',
+                role: role.id,
+                salt: salt,
+                passwordHash: passwordHash
+            };
+            User.create(adminUser).then(user => {
+                role.users.push(user.id);
+                role.save();
+            });
+        })
+    })
+
+};
 
 
 

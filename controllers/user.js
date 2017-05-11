@@ -1,5 +1,5 @@
 const User = require('mongoose').model('User');
-
+const Unapproved=require('mongoose').model('Unapproved');
 
 const encryption = require('./../utilities/encryption');
 
@@ -10,6 +10,10 @@ module.exports = {
 
     registerPost:(req, res) => {
         let registerArgs = req.body;
+        if(req.body.regtype=="Organisation"){
+            console.log("zdr");
+           // Unapproved.create(user.id);
+        }
 
         User.findOne({email: registerArgs.email}).then(user => {
             let errorMsg = '';
@@ -23,6 +27,7 @@ module.exports = {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
             } else {
+
                 let salt = encryption.generateSalt();
                 let passwordHash = encryption.hashPassword(registerArgs.password, salt);
 
@@ -37,12 +42,18 @@ module.exports = {
 
                 User.create(userObject).then(user => {
                     req.logIn(user, (err) => {
+                        if(req.body.regtype=="Organisation"){
+                            console.log(user.id);
+                            let obj={
+                                usersnot: user.id
+                            };
+                            Unapproved.create(obj);
+                        }
                         if (err) {
                             registerArgs.error = err.message;
                             res.render('user/register', registerArgs);
                             return;
                         }
-
                         res.redirect('/')
                     })
                 })

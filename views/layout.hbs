@@ -21,6 +21,9 @@
                         <ul class="nav navbar-nav navbar-right">   
                             {{#if user}}<li><a href="/user/details">Welcome({{user.fullName}})</a></li> {{/if}}                       
                             <li><a href="/">Home</a></li>
+                            {{#if user.role}}
+                            <li><a href="/admin/approve">Odobri kandidaturi</a></li>
+                            {{/if}}
                             <li><a href="/allproblems">All problems</a></li>
                             {{#if user}}
                             <li><a href="/problem/create">New Problem</a></li>

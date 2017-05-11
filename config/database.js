@@ -14,10 +14,12 @@ module.exports = (config) => {
         console.log('MongoDB ready!')
     });
 
-    require('./../models/User');
+    require('./../models/Role').initialize();
+    require('./../models/User').initialize();
     require('./../models/Problem');
     require('./../models/Tags').initialize();
     require('./../models/Comment');
+    require('./../models/Unaproved');
 };
 
 
