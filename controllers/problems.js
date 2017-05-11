@@ -78,8 +78,18 @@ module.exports = {
     detailsGet: (req, res) => {
         let id = req.params.id;
         Problem.findById(id).populate('comments').then(problem => {
-            User.findById(problem.author).then(author => {
-                res.render('details', { problem, author });
+            User.findById(problem.author).then(problemauthor => {
+                if (problem.comments.length == 0) {
+                    res.render('details', { problem, problemauthor });
+                }
+                problem.comments.forEach(function (comment, idx, array) {
+                    User.findById(comment.author).then(commentauthor => {
+                        comment.author = commentauthor;
+                        if (idx === array.length - 1) {
+                            res.render('details', { problem, author: problemauthor });
+                        }
+                    });
+                }, this);
             });
         });
 

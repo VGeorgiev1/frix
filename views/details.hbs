@@ -1,5 +1,5 @@
 <script>
-    id = "{{id}}";
+    id = "{{problem.id}}";
 
 </script>
 <style>
@@ -52,7 +52,7 @@
         top: -0.7em;
         font-size: 1.5em;
         padding: 0 0.25em;
-        background: #F8F8F8;
+        background: #ECF0F1;
     }
 </style>
 
@@ -101,9 +101,9 @@
             <input type='submit' value='Submit' />
         </form>
     </div>
-    {{/if}} 
+    {{/if}}
     <hr>
-    <p>{{comments.lenght}} comments</p>
+    <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
@@ -111,10 +111,10 @@
             <blockquote class="col-sm-11" id="commentBox">
                 <div class="row" style="margin-bottom:5px;">
                     <div class="col-sm-3">
-                        <b>{{author.name}}name</b>
+                        <b>{{this.author.fullName}}</b>
                     </div>
                     <div class="col-sm-9">
-                        <p style="text-align:right;">{{comment.date}}data</p>
+                        <p style="text-align:right;font-size:0.8em;">{{this.date}}</p>
                     </div>
                 </div>
                 {{this.text}}
