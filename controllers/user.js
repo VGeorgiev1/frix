@@ -1,5 +1,5 @@
 const User = require('mongoose').model('User');
-
+const Role=require('mongoose').model('Role');
 const Unapproved=require('mongoose').model('Unapproved');
 
 
@@ -17,7 +17,19 @@ module.exports = {
             console.log("zdr");
            // Unapproved.create(user.id);
         }
-
+        let filename="";
+        let image=req.files.image;
+        if(image){
+            filename=req.body.email+'_'+image.name;
+            image.mv(`./public/images/${filename}`, err => {
+                if(err){
+                    console.log(err.message);
+                }
+            });
+        }
+        else {
+            filename="facebook-default-no-profile-pic.jpg";
+        }
         User.findOne({ email: registerArgs.email }).then(user => {
             let errorMsg = '';
             if (user) {
@@ -33,19 +45,25 @@ module.exports = {
 
                 let salt = encryption.generateSalt();
                 let passwordHash = encryption.hashPassword(registerArgs.password, salt);
+                Role.findOne({name: 'User'}).then(role => {
 
-
-                let userObject = {
-                    email: registerArgs.email,
-                    passwordHash: passwordHash,
-                    fullName: registerArgs.fullName,
-                    salt: salt
-                };
+                    let userObject = {
+                        email: registerArgs.email,
+                        passwordHash: passwordHash,
+                        fullName: registerArgs.fullName,
+                        salt: salt,
+                        role: role.id,
+                        profpicture: `/images/${filename}`
+                    };
 
                 User.create(userObject).then(user => {
+
                     req.logIn(user, (err) => {
+                        role.users.push(user.id);
+                        role.save();
                         if(req.body.regtype=="Organisation"){
                             console.log(user.id);
+
                             let obj={
                                 usersnot: user.id
                             };
@@ -59,6 +77,7 @@ module.exports = {
                         res.redirect('/')
                     })
                 })
+            })
             }
         })
     },

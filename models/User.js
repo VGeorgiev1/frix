@@ -15,7 +15,8 @@ let userSchema = mongoose.Schema(
         description: {type:String},
         lat: {type:Number},
         lng: {type: Number},
-        role: {type: ObjectId}
+        role: {type: ObjectId, ref: 'Role'},
+        profpicture: {type: String}
     }
 );
 
@@ -37,9 +38,7 @@ module.exports.initialize= () => {
 
     let email='admin@mysite.com';
     User.findOne({email: email}).then(admin =>{
-        if(admin){
-            return;
-        }
+
         Role.findOne({name: 'Admin'}).then(role => {
             if(!role)
             {

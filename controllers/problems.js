@@ -32,18 +32,26 @@ module.exports = {
         }
         parts.author = req.user.id;
         let image = req.files.image;
+        let filenameAndExt=image.name;
 
-        let imageName = image.name;
+        let filename=filenameAndExt.substr(0,filenameAndExt.lastIndexOf('.'));
+        let exten=filenameAndExt.substr(filenameAndExt.lastIndexOf('.')+1);
 
-        image.mv(`./public/${imageName}`, err => {
+        let rnd=require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
+        let finalname=`${filename}_${rnd}.${exten}`;
+
+
+
+        image.mv(`./public/problempictures/${finalname}`, err => {
             if (err) {
                 console.log(err.message);
             }
         });
         parts.points = 0;
-        parts.picture = imageName;
+        parts.picture = `/problempictures/${finalname}`;
         parts.lng = req.body.lng;
         parts.lat = req.body.lat;
+
         Problem.create(parts).then(problem => {
             req.user.problems.push(problem.id);
             req.user.save(err => {

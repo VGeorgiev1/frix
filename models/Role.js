@@ -16,13 +16,18 @@ module.exports=Role;
 module.exports.initialize = () => {
     Role.findOne({name: 'Organisation'}).then(role =>{
         if(!role){
-            Role.create({name: 'User'});
+            Role.create({name: 'Organisation'});
         }
 
     });
     Role.findOne({name: 'Admin'}).then(role => {
         if(!role){
-            Role.create({name: 'Admin'});
+            Role.create({name: 'Admin', users: []});
+        }
+    });
+    Role.findOne({name: 'User'}).then(role => {
+        if(!role){
+            Role.create({name: 'User'});
         }
     });
 };

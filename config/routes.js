@@ -34,7 +34,7 @@ module.exports = (app) => {
     app.get("/user/details", userController.detailsGet);
 
     app.get("/admin/approve", adminController.approveGet);
-
+    app.post("/admin/approve/:id", adminController.approvePost);
 
     app.get("/user/settings", userController.settingsGet);
     app.post("/user/settings", userController.settingsPost)

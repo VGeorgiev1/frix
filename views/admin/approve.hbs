@@ -20,7 +20,9 @@
                 <p>{{this.usersnot.fullName}}</p>
                 <p>{{this.usersnot.email}}</p>
                 <p>{{this.usersnot.id}}</p>
-                <a class="btn btn-default" href="/admin/approve/{{this.usersnot.id}}">Approve</a>
+                <form action="/admin/approve/{{this.usersnot.id}}" method="post">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             {{/each}}
 
             </article>
