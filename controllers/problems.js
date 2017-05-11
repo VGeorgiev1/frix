@@ -88,12 +88,12 @@ module.exports = {
 
     },
     upvote: (req, res) => {
-        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
+        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
             res.json(prob.points);
         });
     },
     downvote: (req, res) => {
-        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
+        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
             res.json(prob.points);
         });
     }
