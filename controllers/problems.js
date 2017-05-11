@@ -3,53 +3,6 @@ const Problem = require('mongoose').model('Prob');
 const Comment = require('mongoose').model('Comment');
 
 function vote(req, res, amount) {
-
-    if (req.user === undefined) {
-        res.json("not logged!");
-        return;
-    }
-
-    if(amount==-1){
-        User.findById(req.user.id).then(user => {
-            if(user.upvotes.indexOf(req.params.id)> -1){
-
-                let index=user.upvotes.indexOf(req.params.id);
-                user.upvotes.splice(index,1);
-                user.save(err => {
-                    if(err){
-                        console.log(err.message);
-                    }
-                });
-            }
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-                {
-                    downvotes: req.params.id
-                }
-        }).exec();
-    }
-    else{
-        User.findById(req.user.id).then(user => {
-            if(user.downvotes.indexOf(req.params.id)> -1){
-                let index=user.downvotes.indexOf(req.params.id);
-                user.downvotes.splice(index,1);
-                user.save(err => {
-                    if(err){
-                        console.log(err.message);
-                    }
-                });
-            }
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-                {
-                    upvotes: req.params.id
-                }
-        }).exec();
-    }
-
-
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
         res.json(prob.points);
     });
@@ -132,9 +85,9 @@ module.exports = {
             req.user.comments.push(com);
             Problem.update({ _id: req.params.id }, {
                 $push:
-                {
-                    comments: com.id
-                }
+                    {
+                        comments: com.id
+                    }
             }).then(res.redirect(`../details/${req.params.id}`));
 
         });
@@ -168,9 +121,9 @@ module.exports = {
             if (user.upvotes.indexOf(req.params.id) === -1) {
                 User.update({ _id: req.user.id }, {
                     $push:
-                    {
-                        upvotes: req.params.id
-                    }
+                        {
+                            upvotes: req.params.id
+                        }
                 }).exec();
             }
         });
@@ -200,9 +153,9 @@ module.exports = {
             if (user.downvotes.indexOf(req.params.id) === -1) {
                 User.update({ _id: req.user.id }, {
                     $push:
-                    {
-                        downvotes: req.params.id
-                    }
+                        {
+                            downvotes: req.params.id
+                        }
                 }).exec();
             }
         });
