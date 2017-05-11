@@ -28,5 +28,7 @@ module.exports = (app) => {
     app.post("/downvote/:id", problemController.downvote);
 
     app.get("/allproblems", problemController.allproblemsGet);
+
+    app.get("/user/details", userController.detailsGet);
 };
 
