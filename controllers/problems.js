@@ -1,6 +1,23 @@
 const User = require('mongoose').model('User');
 const Problem = require('mongoose').model('Prob');
 const Comment = require('mongoose').model('Comment');
+
+function vote(req, res, amount) {
+    if (req.user === undefined) {
+        res.json("not logged!");
+        return;
+    }
+    User.update({ _id: req.user.id }, {
+        $push:
+        {
+            pointgiven: req.params.id
+        }
+    }).exec();
+    Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
+        res.json(prob.points);
+    });
+}
+
 module.exports = {
     createGet: (req, res) => {
         res.render('problem/create');
@@ -87,32 +104,11 @@ module.exports = {
 
 
     },
-    upvote: (req, res) => {
 
-        User.update({ _id: req.user.id }, {
-            $push:
-            {
-                upvotes: req.params.id
-            }
-        }).exec();
-        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
 
-            res.json(prob.points);
-        });
-    },
-    downvote: (req, res) => {
-        User.update({ _id: req.user.id }, {
-            $push:
-                {
-                    downvotes: req.params.id
-                }
-        }).exec();
-         
+    upvote: (req, res) => { vote(req, res, 1) },
+    downvote: (req, res) => { vote(req, res, -1) },
 
-        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
-            res.json(prob.points);
-        });
-    },
     allproblemsGet: (req, res) => {
         Problem.find({}).sort({ points: 'desc' }).then(problems => {
 
