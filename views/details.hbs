@@ -75,7 +75,7 @@
                 <div id="descBox">
                     <div class="row">
                         <img class="col-sm-1" alt="profile pic" height="70" width="80">
-                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}name</b><br>{{problem.date}}</p>
+                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.date}}</p>
                     </div>
                     <i>Description:</i>
                     <p>{{problem.description}}</p>
@@ -103,7 +103,8 @@
     </div>
     <hr>
     <p>{{comments.lenght}} comments</p>
-    {{/if}} {{#each comments}}
+    {{/if}} 
+    {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
         <div class="col-sm-11">
