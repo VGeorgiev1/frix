@@ -98,8 +98,7 @@ module.exports = {
             res.render('user/login');
             return;
         }
-        User.findOneAndUpdate({ _id: req.user.id }, { $set: { lat: req.body.lat, lng: req.body.lng } }).exec();
-        User.findById(req.user.id).then(user => {
+        User.findOneAndUpdate({ _id: req.user.id }, { $set: { lat: req.body.lat, lng: req.body.lng } }, { new: true }, function (err, user) {
             res.render('user/settings', { lat: user.lat, lng: user.lng });
         });
     }
