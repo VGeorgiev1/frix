@@ -26,6 +26,7 @@ module.exports = {
                 let salt = encryption.generateSalt();
                 let passwordHash = encryption.hashPassword(registerArgs.password, salt);
 
+
                 let userObject = {
                     email: registerArgs.email,
                     passwordHash: passwordHash,
