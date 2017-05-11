@@ -2,10 +2,29 @@
     id = "{{id }}";
 
 </script>
+<style>
+    #commentBox {
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+        padding: 20px;
+        word-wrap: break-word;
+    }
+
+    #descBox {
+        border-radius: 25px;
+        border: 2px solid #53AC31;
+        padding: 20px;
+        word-wrap: break-word;
+    }
+
+    #imgur {
+        max-width: 50%;
+    }
+</style>
 
 <div class="container body-content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <article>
                 <table width="100%">
                     <tr>
@@ -27,9 +46,10 @@
                 <img src="/{{picture}}">
             </article>
         </div>
+
     </div>
     {{#if user}}
-    <div>
+    <div style="margin-bottom:50px;">
         <form method='post'>
             Comment:<br />
             <textarea name='comment' id='comment'></textarea><br />
@@ -38,7 +58,16 @@
         </form>
     </div>
     {{/if}} {{#each comments}}
-    <p>{{this.text}}</p>
+    <div class="row" style="margin-top:5px;">
+        <img class="col-sm-1" alt="profile pic" height="70" width="80">
+        <div class="col-sm-11">
+            <blockquote class="col-sm-11" id="commentBox">
+                <b>{{author.fullName}}asd</b>
+                <p></p>
+                {{this.text}}
+            </blockquote>
+        </div>
+    </div>
     {{/each}}
 </div>
 <script src="/javascripts/voting.js">

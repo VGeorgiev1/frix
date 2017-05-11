@@ -48,6 +48,10 @@ module.exports = {
             }
         })
     },
+    detailsGet: (req,res) => {
+        res.render('user/details');
+
+    },
 
     loginGet: (req, res) => {
         res.render('user/login');
@@ -79,4 +83,5 @@ module.exports = {
         req.logOut();
         res.redirect('/');
     }
+
 };
