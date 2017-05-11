@@ -103,7 +103,7 @@
     </div>
     {{/if}}
     <hr>
-    <p>{{comments.lenght}} comments</p>
+    <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
@@ -114,7 +114,7 @@
                         <b>{{this.author.fullName}}name</b>
                     </div>
                     <div class="col-sm-9">
-                        <p style="text-align:right;">{{comment.date}}data</p>
+                        <p style="text-align:right;font-size:0.8em;">{{this.date}}</p>
                     </div>
                 </div>
                 {{this.text}}
