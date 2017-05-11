@@ -115,14 +115,18 @@ module.exports = {
             else if (user.downvotes.indexOf(req.params.id) === -1 && user.upvotes.indexOf(req.params.id) === -1) {
                 vote(req, res, 1);
             }
-
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-            {
-                upvotes: req.params.id
+            else {
+                vote(req, res, 0);
             }
-        }).exec();
+            if (user.upvotes.indexOf(req.params.id) === -1) {
+                User.update({ _id: req.user.id }, {
+                    $push:
+                    {
+                        upvotes: req.params.id
+                    }
+                }).exec();
+            }
+        });
     },
     downvote: (req, res) => {
         if (req.user === undefined) {
@@ -143,14 +147,18 @@ module.exports = {
             else if (user.downvotes.indexOf(req.params.id) === -1 && user.upvotes.indexOf(req.params.id) === -1) {
                 vote(req, res, -1);
             }
-        });
-        User.update({ _id: req.user.id }, {
-            $push:
-            {
-                downvotes: req.params.id
+            else {
+                vote(req, res, 0);
             }
-        }).exec();
-
+            if (user.downvotes.indexOf(req.params.id) === -1) {
+                User.update({ _id: req.user.id }, {
+                    $push:
+                    {
+                        downvotes: req.params.id
+                    }
+                }).exec();
+            }
+        });
     },
 
     allproblemsGet: (req, res) => {
