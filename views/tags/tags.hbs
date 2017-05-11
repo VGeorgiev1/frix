@@ -3,11 +3,14 @@
         <form class="form-horizontal" method="post" action="/user/login">
             <fieldset>
                 <legend>Tags</legend>
-                {{#each tags}}
-                    <li>{{this.image}}</li>
-                    <li>{{this.title}}</li>
-                    <li>{{this.description}}</li>
-                {{/each}}
+                <div id="tagList" class="dropdown-check-list" tabindex="100">
+                    <span class="anchor">Tags</span>
+                    <ul class="items">
+                       {{#each tags}}
+                          <li><input title={{this.description}} type="checkbox" name="vehicle" value="Bike">{{this.title}}</li>
+                       {{/each}}
+                    </ul>
+                </div>
             </fieldset>
         </form>
     </div>
