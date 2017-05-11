@@ -92,7 +92,7 @@ module.exports = {
         User.update({ _id: req.user.id }, {
             $push:
             {
-                pointgiven: req.params.id
+                upvotes: req.params.id
             }
         }).exec();
         Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
@@ -101,6 +101,14 @@ module.exports = {
         });
     },
     downvote: (req, res) => {
+        User.update({ _id: req.user.id }, {
+            $push:
+                {
+                    downvotes: req.params.id
+                }
+        }).exec();
+         
+
         Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
             res.json(prob.points);
         });
