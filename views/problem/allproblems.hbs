@@ -1,0 +1,29 @@
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+
+            {{#each problems}}
+            <article>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <header>
+                                <h2>{{this.title}}</h2>
+                            </header>
+                        </td>
+                        <td align="right">
+                            Points: <span id="points">{{this.points}}</span>
+
+                        </td>
+                    </tr>
+                </table>
+
+
+                <p>{{this.description}}</p>
+
+                <img src="/{{this.picture}}">
+            </article>
+            {{/each}}
+        </div>
+    </div>
+</div>

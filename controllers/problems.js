@@ -109,5 +109,12 @@ module.exports = {
         Problem.findById(req.params.id).then(problem => {
             res.json(problem.points);
         });
+    },
+    allproblemsGet: (req,res) => {
+        Problem.find({}).sort({points : 'desc'}).then(problems => {
+
+            res.render('problem/allproblems', {problems});
+
+        })
     }
 };
