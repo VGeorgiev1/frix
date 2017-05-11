@@ -8,7 +8,8 @@ let userSchema = mongoose.Schema(
         fullName: {type: String, required: true},
         salt: {type: String, required: true},
         problems: [{type: ObjectId, ref: 'Problem'}],
-        comments: [{type: ObjectId, ref:'Comment'}]
+        comments: [{type: ObjectId, ref:'Comment'}],
+        pointgiven: [{type: ObjectId, ref:'Problem'}]
     }
 );
 
