@@ -82,6 +82,8 @@ module.exports = {
         })
     },
     detailsGet: (req, res) => {
+
+
         res.render('user/details');
 
     },

@@ -53,6 +53,6 @@ function generatePopupHTML(problem) {
     return `
 <h1><a href="details/${problem._id}" style="text-decoration:none;">${problem.title}</a></h1>
 <p>${problem.description.substring(0,7)}...</p>
-<img src='/${problem.picture}' style="max-width:50%;"></img>
+<img src='${problem.picture}' style="max-width:50%;"></img>
     `;
 }

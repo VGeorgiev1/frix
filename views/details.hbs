@@ -74,13 +74,13 @@
 
                 <div id="descBox">
                     <div class="row">
-                        <img class="col-sm-1" alt="profile pic" height="70" width="80">
+                        <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="70" width="80">
                         <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.date}}</p>
                     </div>
                     <i>Description:</i>
                     <p>{{problem.description}}</p>
 
-                    <img src="/{{problem.picture}}" id="imgur">
+                    <img src="{{problem.picture}}" id="imgur">
                 </div>
                 <div style="margin-bottom:20px;">
                     {{#if user}}
@@ -106,7 +106,7 @@
     <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
-        <img class="col-sm-1" alt="profile pic" height="70" width="80">
+        <img src="{{this.author.profpicture}}" class="col-sm-1" alt="profile pic" height="70" width="80">
         <div class="col-sm-11">
             <blockquote class="col-sm-11" id="commentBox">
                 <div class="row" style="margin-bottom:5px;">

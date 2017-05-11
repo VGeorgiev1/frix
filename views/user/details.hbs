@@ -2,11 +2,12 @@
     <div class="well">
         <div class="row">
             <div class="col-sm-4">
-                <img src="" alt="profile pic"></img>
+                <img src="{{user.profpicture}}" alt="profile pic"></img>
             </div>
             <div class="col-sm-8">
                 <p>Email: {{user.email}}</p>
                 <p>Full Name: {{user.fullName}}</p>
+                <p>Current Role: {{user.role.name}}</p>
             </div>
         </div>
     </div>
