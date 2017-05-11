@@ -29,5 +29,7 @@ module.exports = (app) => {
     app.post("/resetvote/:id", problemController.resetvote);
 
     app.get("/allproblems", problemController.allproblemsGet);
+
+    app.get("/user/details", userController.detailsGet);
 };
 
