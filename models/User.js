@@ -10,7 +10,10 @@ let userSchema = mongoose.Schema(
         problems: [{type: ObjectId, ref: 'Problem'}],
         comments: [{type: ObjectId, ref:'Comment'}],
         upvotes: [{type: ObjectId, ref:'Problem'}],
-        downvotes: [{type: ObjectId, ref:'Problem'}]
+        downvotes: [{type: ObjectId, ref:'Problem'}],
+        description: {type:String},
+        lat: {type:Number},
+        lng: {type: Number}
     }
 );
 
