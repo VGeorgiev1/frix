@@ -88,26 +88,13 @@ module.exports = {
 
     },
     upvote: (req, res) => {
-        console.log('up', req.params.id);
-        Problem.update({ _id: req.params.id }, {
-            $inc:
-            {
-                points: 1,
-            }
-        }).exec();
-        Problem.findById(req.params.id).then(problem => {
-            res.json(problem.points);
+        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: -1 } }, { new: true }, function (err, prob) {
+            res.json(prob.points);
         });
     },
     downvote: (req, res) => {
-        Problem.update({ _id: req.params.id }, {
-            $inc:
-            {
-                points: -1,
-            }
-        }).exec();
-        Problem.findById(req.params.id).then(problem => {
-            res.json(problem.points);
+        Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: 1 } }, { new: true }, function (err, prob) {
+            res.json(prob.points);
         });
     },
     allproblemsGet: (req,res) => {
