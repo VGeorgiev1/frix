@@ -3,7 +3,7 @@ $('#upvote').on('click', function (e) {
     $.ajax({
         type: "POST",
         url: `/upvote/${id}`,
-        success: () => { console.log('up') }
+        success: (p) => { $("#points").html(p) }
     });
 });
 
@@ -12,6 +12,6 @@ $('#downvote').on('click', function (e) {
     $.ajax({
         type: "POST",
         url: `/downvote/${id}`,
-        success: () => { console.log('down') }
+        success: (p) => { $("#points").html(p) }
     });
 });
