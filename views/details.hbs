@@ -9,46 +9,23 @@
         padding: 20px;
         word-wrap: break-word;
     }
-
     #descBox {
         border-radius: 25px;
         border: 2px solid #6495ED;
         padding: 20px;
         word-wrap: break-word;
         margin-bottom: 20px;
+        background-color:white;
     }
-
     #imgur {
         max-width: 50%;
     }
-
     #comment {
         width: 92%;
         padding: 1%;
         font-size: 1.2em;
         border: 8px outset #6495ED;
     }
-
-    #comment::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
-    }
-
-    #comment::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 10px #4682B4;
-        border-radius: 10px;
-    }
-
-    #comment::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: #6495ED;
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-    }
-
-    #comment::-webkit-scrollbar-thumb:hover {
-        background: #6495ED;
-    }
-
     .active {
         background-color: green;
         color: red;
@@ -104,7 +81,7 @@
         <img class="col-sm-1" alt="profile pic" height="70" width="80">
         <div class="col-sm-11">
             <blockquote class="col-sm-11" id="commentBox">
-                <b>{{author.fullName}}asd</b>
+                <b>{{author.fullName}}name</b>
                 <p></p>
                 {{this.text}}
             </blockquote>
