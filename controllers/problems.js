@@ -1,6 +1,6 @@
 const User = require('mongoose').model('User');
 const Problem = require('mongoose').model('Prob');
-const Comment=require('mongoose').model('Comment');
+const Comment = require('mongoose').model('Comment');
 module.exports = {
     createGet: (req, res) => {
         res.render('problem/create');
@@ -54,35 +54,55 @@ module.exports = {
     },
     probleminfoGet: (req, res) => {
         Problem.find({}).populate('author').then(problems => {
-            res.json(problems); 
+            res.json(problems);
         })
     },
     listproblemsGet: (req, res) => {
         res.render('problem/listproblems');
     },
-    detailsGet: (req, res)=>{
+    detailsGet: (req, res) => {
         let id = req.params.id;
 
         Problem.findById(id).populate('comments').then(problem => {
             res.render('details', problem);
         });
     },
-    detailsPost: (req,res)=> {
+    detailsPost: (req, res) => {
 
-        let com={};
-        com.author=req.user.id;
-        com.points=0;
-        com.text=req.body.comment;
-        com.post=req.params.id;
+        let com = {};
+        com.author = req.user.id;
+        com.points = 0;
+        com.text = req.body.comment;
+        com.post = req.params.id;
         Comment.create(com).then(com => {
-           req.user.comments.push(com);
-           Problem.update({_id: req.params.id}, {$push:
-               {
-                   comments: com.id
-               }}).then(res.redirect(`../details/${req.params.id}`));
+            req.user.comments.push(com);
+            Problem.update({ _id: req.params.id }, {
+                $push:
+                {
+                    comments: com.id
+                }
+            }).then(res.redirect(`../details/${req.params.id}`));
 
         });
 
 
+    },
+    upvote: (req, res) => {
+        console.log('up', req.params.id);
+        Problem.update({ _id: req.params.id }, {
+            $inc:
+            {
+                points: 1,
+            }
+        }).exec();
+    },
+    downvote: (req, res) => {
+        console.log('down', req.params.id);
+        Problem.update({ _id: req.params.id }, {
+            $inc:
+            {
+                points: -1,
+            }
+        }).exec();
     }
 };

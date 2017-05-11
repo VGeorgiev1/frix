@@ -1,16 +1,28 @@
+<script>
+    id = "{{id }}";
+
+</script>
+
 <div class="container body-content">
     <div class="row">
         <div class="col-md-6">
             <article>
-                <header>
-                    <h2>{{title}}</h2>
-                </header>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <header>
+                                <h2>{{title}}</h2>
+                            </header>
+                        </td>
+                        <td align="right">
+                            <button id="upvote">^GORe^</button>
+                            <button id="downvote">vDolU!v</button>
+                        </td>
+                    </tr>
+                </table>
+
 
                 <p>{{description}}</p>
-
-                <small class="author">
-                        {{author.fullName}}
-                    </small>
 
                 <img src="/{{picture}}">
             </article>
@@ -25,8 +37,10 @@
             <input type='submit' value='Submit' />
         </form>
     </div>
-    {{/if}}
-    {{#each comments}}
-        <p>{{this.text}}</p>
+    {{/if}} {{#each comments}}
+    <p>{{this.text}}</p>
     {{/each}}
 </div>
+<script src="/javascripts/voting.js">
+
+</script>

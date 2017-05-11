@@ -20,10 +20,11 @@ module.exports = (app) => {
     app.get('/problem/probleminfo', problemController.probleminfoGet);
 
     app.get('/tags/tagsinfo', tagsController.tagsInfoGet);
-    
+
     app.get('/details/:id', problemController.detailsGet);
-    app.post('/details/:id',problemController.detailsPost);
+    app.post('/details/:id', problemController.detailsPost);
 
-
+    app.post("/upvote/:id", problemController.upvote);
+    app.post("/downvote/:id", problemController.downvote);
 };
 
