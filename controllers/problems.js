@@ -132,7 +132,7 @@ module.exports = {
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
                             problem.solutions.sort((a, b) => b.points - a.points);
-                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthicated });
+                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthenticated });
                         }
                     });
                 }, this);
