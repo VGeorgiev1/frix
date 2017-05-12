@@ -159,10 +159,12 @@
                     {{#if user}}
                     <b id="voting">Гласувай:
                     <button id="upvote">▲</button>
-                    <button id="downvote">▼</button> {{/if}}
+                    <button id="downvote">▼</button>{{/if}}
                     <span id="points">Точки:{{problem.points}}</span>
+                    {{#if user}}
                     <button style="float:right;"><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
                     </b>
+                    {{/if}}
                 </div>
             </article>
         </div>
@@ -195,6 +197,7 @@
     </div>
     {{/each}}
     <hr class="coolLine">
+    <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p>
     {{#each solutions}}
         <div class="row">
             <article id="art">
