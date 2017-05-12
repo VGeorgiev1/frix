@@ -1,7 +1,7 @@
 <style type="text/css">
     #map {
-        width: 70%;
-        height: 450px;
+        width: 50%;
+        height: 400px;
         display: block;
         margin: auto;
         margin-bottom: 15px;;
@@ -15,6 +15,7 @@
     }
     ul {
         list-style-type: none;
+        text-align:center;
     }
     .well{
         border-radius: 5px;
@@ -25,6 +26,9 @@
     }
     input[type="text"], textarea{
         background-color:#F8F8F8
+    }
+    a{
+        color:black;
     }
 </style>
 
@@ -39,7 +43,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemTitle">Заглавие:</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="title" placeholder="Problem Title" name="title" required>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                 </div>
 
@@ -64,16 +68,17 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Описание:</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" id="problemContent" rows="5" name="description" required></textarea>
+                        <textarea class="form-control" id="problemContent" rows="5" name="description" style="background-color:#F8F8F8;" required></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Снимка:</label>
                     <div class="col-sm-6">
-                        <input class="form-control" id="image" type="file" name="image">
+                        <input class="form-control" id="image" type="file" name="image" style="background-color:#F8F8F8;">
                     </div>
                 </div>
                 <div>
+                    <b style="text-align:center;">Избери категория:</b>
                     <div id="tagList" class="content hideContent" tabindex="100">
                     <ul class="items">
                         {{#each tags}}
@@ -82,21 +87,17 @@
                     </ul>
                     </div>
                     <div class="show-more">
-                        <a>Покажи още</a>
+                        <a style="text-decoration:none;">Покажи още</a>
                     </div>
                     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                     <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
                 </div>
                
-                <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-4">
+                <div style="text-align:center;">
+                        <button type="reset" class="btn btn-default">Отмени</button>
 
-                        <button type="reset" class="btn btn-default">Cancel</button>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Публикувай</button>
                 </div>
-
             </fieldset>
         </form>
     </div>

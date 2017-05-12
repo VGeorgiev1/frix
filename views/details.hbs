@@ -86,6 +86,10 @@
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
+    a, a:hover{
+        color:black;
+        text-decoration:none;
+    }
 </style>
 
 <div class="container body-content">
@@ -121,11 +125,11 @@
                 </div>
                 <div style="margin-bottom:20px;">
                     {{#if user}}
-                    <b id="voting">Vote:
+                    <b id="voting">Гласувай:
                     <button id="upvote">▲</button>
                     <button id="downvote">▼</button> {{/if}}
-                    <span id="points">Points:{{problem.points}}</span>
-                    <button><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
+                    <span id="points">Точки:{{problem.points}}</span>
+                    <button style="float:right;"><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
                     </b>
                 </div>
             </article>
@@ -135,15 +139,15 @@
     {{#if user}}
     <div style="margin-bottom:40px;">
         <form method='post'>
-            <p style="font-size:1.7em;">Leave a comment:</p>
-            <textarea class="col-l-12" name='comment' id='comment' placeholder="Type here..."></textarea><br />
+            <p style="font-size:1.7em;">Коментирай:</p>
+            <textarea class="col-l-12" name='comment' id='comment' placeholder="Пиши тук..."></textarea><br />
 
-            <input type='submit' value='Submit'/>
+            <input type='submit' value='Изпрати'/>
         </form>
     </div>
     {{/if}}
     <hr class="coolLine">
-    <p>{{problem.comments.length}} comments</p>
+    <p>{{problem.comments.length}} коментара</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
         <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="80" width="90"></span>
