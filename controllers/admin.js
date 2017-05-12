@@ -4,9 +4,14 @@ const Role = require('mongoose').model('Role');
 module.exports = {
     approveGet: (req, res) => {
 
+
         Role.find({ name: 'Unapproved' }).populate('users.').then(users => {
             let found = [];
 
+            if(users[0].users.length==0){
+                res.render('admin/approve');
+                return;
+            }
             users[0].users.forEach((user, idx) => {
                 User.findById(user).then(user => {
 

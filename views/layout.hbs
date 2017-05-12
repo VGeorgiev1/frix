@@ -21,7 +21,7 @@
                         <ul class="nav navbar-nav navbar-right">   
                             {{#if user}}<li><a href="/user/details">Добре дошли({{user.fullName}})</a></li> {{/if}}                       
                             <li><a href="/">Начало</a></li>
-                            {{#if user.role}}
+                            {{#if user.isAdmin}}
                             <li><a href="/admin/approve">Одобри кандидатура</a></li>
                             {{/if}}
                             <li><a href="/allproblems">Всички проблеми</a></li>
