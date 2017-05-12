@@ -1,9 +1,22 @@
+<style>
+.well{
+        border-radius: 5px;
+        background-color: #FFF;
+        padding:15px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+    }
+    input[type="password"], input[type="text"], textarea{
+        background-color:#F8F8F8
+    }
+</style>
+
 <div class="container body-content span=8 offset=2">
     <div class="well">
         <form class="form-horizontal" method="post" action="/user/login">
             <fieldset>
                  <div>
-                    <h1 class="text-center">Log in</h1>
+                    <h1 class="text-center">Влез</h1>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Email</label>
@@ -12,15 +25,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Password</label>
+                    <label class="col-sm-4 control-label">Парола</label>
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Парола" name="password">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="text-align:center;">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <a class="btn btn-default" href="/">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a class="btn btn-default" href="/">Отмени</a>
+                        <button type="submit" class="btn btn-primary">Влез</button>
                     </div>
                 </div>
             </fieldset>
