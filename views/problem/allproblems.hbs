@@ -13,10 +13,20 @@
         padding-bottom:15px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
+        width:80%;
     }
     #desc{
         font-family: "Times New Roman", Times, serif;
         font-size:1.4em;
+    }
+    hr{ 
+        border: 0; 
+        height: 1px; 
+        margin-top:0;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
 </style>
 <div class="container body-content">
@@ -25,13 +35,14 @@
 
             {{#each problems}}
             <article id="art">
-                <table width="100%">
+                <table width="100%" >
                     <tr>
                         <td>
-                            <header style="padding-bottom:20px;">
-                                <h2><a href="/details/{{this.id}}" style="text-decoration:none">{{this.title}}</a></h2>
+                            <header style="padding-bottom:0px;">
+                                <h2><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
                                 <p>Posted on: {{this.formattedDate}}</p>
                             </header>
+                            <hr>
                         </td>
                         <td align="right">
                             Points: <span id="points">{{this.points}}</span>
