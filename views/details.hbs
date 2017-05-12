@@ -225,8 +225,9 @@
         </span>
     </div>
     {{/each}}
-    <hr class="coolLine"> {{#each solutions}}
     <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p>
+    <hr class="coolLine"> {{#each solutions}}
+
     <div class="row">
         <article id="art">
             <table width="100%">
@@ -259,6 +260,9 @@
 
             <img src="{{this.picture}}" id="imgur">
         </article>
+        {{#if isAuthicated}}
+            <p>Okey</p>
+        {{/if}}
         </div>
         {{/each}}
 

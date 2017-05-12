@@ -117,6 +117,13 @@ module.exports = {
                 if (problem.comments.length == 0) {
                     res.render('details', { problem, author: problemauthor, solutions: problem.solutions });
                 }
+                let isAuthicated=false;
+                if(id==req.user.id){
+
+                   isAuthicated =true;
+
+                }
+
                 problem.comments.forEach(function (comment, idx, array) {
                     User.findById(comment.author).then(commentauthor => {
                         comment.author = commentauthor;
@@ -124,8 +131,8 @@ module.exports = {
                         comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
-                            //console.log(problem.solutions);
-                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions });
+                            console.log(isAuthicated);
+                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthicated:isAuthicated });
                         }
                     });
                 }, this);
