@@ -125,6 +125,7 @@ module.exports = {
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
                             //console.log(problem.solutions);
+                            problem.solutions.sort((a, b) => b.points - a.points);
                             res.render('details', { problem, author: problemauthor, solutions: problem.solutions });
                         }
                     });
@@ -153,7 +154,6 @@ module.exports = {
 
 
     },
-
     upvote: (req, res) => {
         if (req.user === undefined) {
             res.json("not logged!");

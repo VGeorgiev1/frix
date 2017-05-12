@@ -143,9 +143,11 @@
                 <div style="margin-bottom:20px;">
                     <b class="voting"> 
                         <span>         
+                            <span class="votebuttons">
                     <span>Гласувай:</span>
                     <button class="upvote" voteid="{{problem.id}}">▲</button>
                     <button class="downvote" voteid="{{problem.id}}">▼</button>
+                    </span>
                         Точки:
                         <span class="points">{{problem.points}}</span>
                     </span>
@@ -202,7 +204,7 @@
                         <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
                     </td>
                     <td>
-                        <span>
+                        <span class="votebuttons">
                             <span>Гласувай:</span>
                         <button class="upvote" voteid="{{this.id}}">▲</button>
                         <button class="downvote" voteid="{{this.id}}">▼</button> Точки:
@@ -219,14 +221,18 @@
         {{/each}}
 
         </div>
-        <script src="/javascripts/voting.js">
-
+        <script src="/javascripts/voting.js"></script>
+        {{#unless user}}
+        <script>
+            $(".votebuttons").css("display", "none");
         </script>
+        {{/unless}}
+
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
         <script>
             userLocation = {
-                lat: {{problem.lat}},
-                lng: {{problem.lng}}
+                lat: parseFloat("{{problem.lat}}"),
+                lng: parseFloat("{{problem.lng}}")
             };
             draggable = false;
         </script>
