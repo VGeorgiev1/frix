@@ -105,6 +105,7 @@ module.exports = {
                         comment.formattedDate = comment.date.toString();
                         comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
+                            problem.comments.reverse();
                             res.render('details', { problem, author: problemauthor });
                         }
                     });
