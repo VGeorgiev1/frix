@@ -8,9 +8,9 @@
     }
     #art{
         background-color:#FFF;
-        padding-left:15px;
-        padding-right:15px;
-        padding-bottom:15px;
+        padding-left:30px;
+        padding-right:30px;
+        padding-bottom:30px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
         width:80%;
@@ -23,7 +23,7 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
     }
-    hr{ 
+    .gradientLine{ 
         border: 0; 
         height: 1px; 
         margin-top:0;
@@ -32,15 +32,36 @@
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
+    #tagsLines{ 
+        border: 0; 
+        height: 1px; 
+        margin-top:0;
+        background-color:#1c2538;
+    }
     .left {
         position:fixed;
         left: 0; top: 60px; bottom: 0;
-        min-width: 200px;
-        max-width: 18%;
+        min-width: 230px;
+        max-width: 25%;
     }
+    .tagsWell{
+        min-height: 50px;
+        padding: 0px;
+        margin-bottom: 5px;
+        background-color: #bce1ff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        min-width: 230px;
+        max-width: 25%;
+    }
+
     .main {
-        position: absolute;
-        left:178px; top:60px; right:0; bottom:0;
+        position: fixed;
+        left:232px; top:60px; right:0; bottom:0;
+        min-width: 500px;
+        
     }
     li{
         list-style-type: none;
@@ -50,7 +71,7 @@
 
     }
 </style>
-<form  style="overflow:scroll" method="post" action="/allproblems/sorted" class="left" >
+<form  style="overflow:auto" method="post" action="/allproblems/sorted" class="left" >
     <div class="tagsWell" style="position:relative">
         <legend style="font-weight:bold" class="legend">Категории</legend>
             <div id="tagList" class="content hideContent" tabindex="100">
@@ -63,13 +84,13 @@
             <div class="show-more">
                 <a>Покажи още</a>
             </div>
+            <hr id="tagsLines">
             <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
             <div>
                 <span style="font-weight:bold" class="legend">Подреди по</span>
             </div>
             <div>
-                <hr>
                 <ul class="items" id="menu">
                     <li><input name="sortBy" type='radio' value="distance"> Близост</li>
                     <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
@@ -77,17 +98,18 @@
                     <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
                 </ul>
             </div>
+            <hr id="tagsLines">
             <div>
                 <button  type="submit">Филтрирай</button>
             </div>
+            <hr id="tagsLines">
             
         </div>
         
 </form>
 <div class="container body-content main">
     <div class="row">
-        <div class="col-md-12">
-
+        <div style="overflow:auto">
             {{#each problems}}
             <article id="art">
                 <table width="100%" >
