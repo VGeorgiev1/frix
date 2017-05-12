@@ -60,13 +60,11 @@ module.exports = {
         Problem.create(parts).then(problem => {
             let formattedDate = problem.date.toString();
             formattedDate = formattedDate.substr(0, formattedDate.indexOf("GMT"));
-            console.log(problem);
             Problem.update({ _id: problem.id }, {
                 $set: {
                     formattedDate: formattedDate
                 }
             }, (e, p) => {
-                console.log(p);
             });
 
             req.user.problems.push(problem.id);
@@ -93,8 +91,8 @@ module.exports = {
     },
     detailsGet: (req, res) => {
         let id = req.params.id;
-        Problem.findById(id).populate('comments').then(problem => {
-
+        Problem.findById(id).populate('comments').populate('solutions.author').then(problem => {
+            console.log(problem.solutions[0].author);
 
             User.findById(problem.author).then(problemauthor => {
 
@@ -108,7 +106,7 @@ module.exports = {
                         comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
-                            console.log(problem.solutions);
+                            //console.log(problem.solutions);
                             res.render('details', { problem, author: problemauthor, solutions: problem.solutions});
                         }
                     });
@@ -258,7 +256,7 @@ module.exports = {
 
         }
         else {
-            req.body.tag.forEach((tag) => console.log(tag));
+            req.body.tag.forEach((tag) => { });
             let filtered = new Array();
             if (req.body.tag.length == 0) {
                 filtered = filtered.concat(problems);
@@ -321,13 +319,10 @@ module.exports = {
 
         Problem.findById(req.params.id).then(problem => {
 
-            /*let formattedDate = Date.now().toString();
-            console.log(formattedDate);
+            let formattedDate = (new Date().toString());
             formattedDate = formattedDate.substr(0, formattedDate.indexOf("GMT"));
-            parts.formattedDate = formattedDate;*/
-            console.log("problem", problem);
+            parts.formattedDate = formattedDate;
             problem.solutions.push(parts);
-            console.log("after push", problem);
             problem.save(err => {
                 if (err) {
                     res.render(`/problem/solution/${req.params.id}`, {
