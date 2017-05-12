@@ -94,7 +94,10 @@ module.exports = {
     detailsGet: (req, res) => {
         let id = req.params.id;
         Problem.findById(id).populate('comments').then(problem => {
+
+
             User.findById(problem.author).then(problemauthor => {
+
                 if (problem.comments.length == 0) {
                     res.render('details', { problem, author: problemauthor });
                 }
@@ -105,7 +108,8 @@ module.exports = {
                         comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
-                            res.render('details', { problem, author: problemauthor });
+                            console.log(problem.solutions);
+                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions});
                         }
                     });
                 }, this);
