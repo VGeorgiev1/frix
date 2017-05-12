@@ -90,6 +90,78 @@
         color:black;
         text-decoration:none;
     }
+     #imgur{
+         max-width: 50%;
+     }
+    a{
+        color:black;
+        padding-bottom:15px;
+    }
+    #art{
+        background-color:#FFF;
+        padding-left:30px;
+        padding-right:30px;
+        padding-bottom:30px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+        width:80%;
+    }
+    #desc{
+        font-family: "Times New Roman", Times, serif;
+        font-size:1.4em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    .gradientLine{
+        border: 0;
+        height: 1px;
+        margin-top:0;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    }
+    #tagsLines{
+        border: 0;
+        height: 1px;
+        margin-top:0;
+        background-color:#1c2538;
+    }
+    .left {
+        position:fixed;
+        left: 0; top: 60px; bottom: 0;
+        min-width: 230px;
+        max-width: 25%;
+    }
+    .tagsWell{
+        min-height: 50px;
+        padding: 0px;
+        margin-bottom: 5px;
+        background-color: #bce1ff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        min-width: 230px;
+        max-width: 25%;
+    }
+
+    .main {
+        position: fixed;
+        left:232px; top:60px; right:0; bottom:0;
+        min-width: 500px;
+
+    }
+    li{
+        list-style-type: none;
+    }
+    .legend{
+        -webkit-padding-start: 10px;
+
+    }
+
 </style>
 
 <div class="container body-content">
@@ -162,6 +234,33 @@
         </span>
     </div>
     {{/each}}
+    {{#each solutions}}
+      <div class="container body-content main">
+        <div class="row">
+            <div style="overflow:auto">
+                    <article id="art">
+                        <table width="100%" >
+                            <tr>
+                                <td>
+                                    <header style="padding-bottom:0px;">
+                                        <h2><b>{{this.title}}</b></h2>
+                                        <p>Публикувано на: {{this.formattedDate}}<br>
+                                        Точки: <span id="points"><b>{{this.points}}</b></span></p>
+                                    </header>
+                                    <hr>
+                                </td>
+                            </tr>
+                        </table>
+                        <p id="desc">Описание:<br>
+                            {{this.description}}</p>
+
+                        <img src="{{this.picture}}" id="imgur">
+                    </article>
+            </div>
+        </div>
+      </div>
+    {{/each}}
+
 </div>
 <script src="/javascripts/voting.js">
 </script>
