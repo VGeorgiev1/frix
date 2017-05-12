@@ -7092,15 +7092,3 @@ p {
 
 }
 
-.tagsWell{
-  min-height: 50px;
-  padding: 0px;
-  margin-bottom: 5px;
-  background-color: #bce1ff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  min-width: 200px;
-  max-width: 18%;
-}
