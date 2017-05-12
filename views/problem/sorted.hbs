@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            {{#each problems}}
+            {{#each filtered}}
             <article id="art">
                 <table width="100%">
                     <tr>
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<form method="post" action="/allproblems/sorted">
+<form method="post" action="allproblems/sorted">
     <div class="tagsWell" style="position:relative">
         <legend style="font-weight:bold">Тагове</legend>
             <div id="tagList" class="content hideContent" tabindex="100">

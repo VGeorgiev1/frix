@@ -20,7 +20,6 @@ module.exports = (app) => {
 
     app.get('/problem/probleminfo', problemController.probleminfoGet);
 
-    app.get('/tags/tagsinfo', tagsController.tagsInfoGet);
 
     app.get('/details/:id', problemController.detailsGet);
     app.post('/details/:id', problemController.detailsPost);
@@ -30,13 +29,14 @@ module.exports = (app) => {
     app.post("/resetvote/:id", problemController.resetvote);
 
     app.get("/allproblems", problemController.allproblemsGet);
-
+    
     app.get("/user/details", userController.detailsGet);
 
     app.get("/admin/approve", adminController.approveGet);
     app.post("/admin/approve/:id", adminController.approvePost);
 
     app.get("/user/settings", userController.settingsGet);
-    app.post("/user/settings", userController.settingsPost)
+    app.post("/user/settings", userController.settingsPost);
+    app.post("/allproblems/sorted", problemController.sortedPost);
 
 };

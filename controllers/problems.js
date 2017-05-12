@@ -1,6 +1,7 @@
 const User = require('mongoose').model('User');
 const Problem = require('mongoose').model('Prob');
 const Comment = require('mongoose').model('Comment');
+const Tags = require('mongoose').model('Tags');
 
 function vote(req, res, amount) {
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
@@ -10,10 +11,14 @@ function vote(req, res, amount) {
 
 module.exports = {
     createGet: (req, res) => {
-        res.render('problem/create');
+        Tags.find({}).then(tags => {
+            res.render('problem/create', { tags });
+        })
+
     },
     createPost: (req, res) => {
         let parts = req.body;
+        console.log(typeof req.body.tag);
         let errorMsg = '';
         if (!req.isAuthenticated()) {
             errorMsg = 'Sorry you must be logged in!';
@@ -32,13 +37,13 @@ module.exports = {
         }
         parts.author = req.user.id;
         let image = req.files.image;
-        let filenameAndExt=image.name;
+        let filenameAndExt = image.name;
 
-        let filename=filenameAndExt.substr(0,filenameAndExt.lastIndexOf('.'));
-        let exten=filenameAndExt.substr(filenameAndExt.lastIndexOf('.')+1);
+        let filename = filenameAndExt.substr(0, filenameAndExt.lastIndexOf('.'));
+        let exten = filenameAndExt.substr(filenameAndExt.lastIndexOf('.') + 1);
 
-        let rnd=require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
-        let finalname=`${filename}_${rnd}.${exten}`;
+        let rnd = require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
+        let finalname = `${filename}_${rnd}.${exten}`;
 
 
 
@@ -88,7 +93,7 @@ module.exports = {
                     User.findById(comment.author).then(commentauthor => {
                         comment.author = commentauthor;
                         if (idx === array.length - 1) {
-                         
+
                             res.render('details', { problem, author: problemauthor });
                         }
                     });
@@ -215,8 +220,46 @@ module.exports = {
         });
     },
     allproblemsGet: (req, res) => {
+
+
         Problem.find({}).sort({ points: 'desc' }).then(problems => {
-            res.render('problem/allproblems', { problems });
+            Tags.find({}).then(tags => {
+                res.render('problem/allproblems', { problems, tags });
+            });
         })
+    },
+
+    sortedPost: (req, res) => {
+        var hack = false;
+        if (typeof req.body.tag == "string") {
+            req.body.tag = [req.body.tag];
+        }
+        if (typeof req.body.tag != "object") {
+            Problem.find({}).then(problems => {
+                Tags.find({}).then(tags => {
+                    res.render('problem/allproblems', { problems, tags });
+                });
+            })
+
+        }
+        else {
+            req.body.tag.forEach((tag) => console.log(tag));
+            let filtered = new Array();
+            if (req.body.tag.length == 0) {
+                filtered = filtered.concat(problems);
+            }
+            req.body.tag.forEach((tag, idx, array) => {
+                Problem.find({ tag: tag }).then(problems => {
+                    filtered = filtered.concat(problems);
+                    if (idx === array.length - 1) {
+                        Tags.find({}).then(tags => {
+                            res.render('problem/allproblems', { problems: filtered, tags });
+                        });
+                    }
+                })
+
+            });
+        }
+
     }
 };

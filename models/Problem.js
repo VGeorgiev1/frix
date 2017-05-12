@@ -10,7 +10,8 @@ let problemSchema = mongoose.Schema({
         date: {type: Date, default:Date.now()},
         lat: {type: Number},
         lng: {type: Number},
-        comments: [{type: ObjectId, ref: 'Comment'}]
+        comments: [{type: ObjectId, ref: 'Comment'}],
+        tag: {type: String}
     });
 const Problem = mongoose.model('Prob', problemSchema);
 
