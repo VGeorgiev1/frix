@@ -7,13 +7,14 @@
         padding-bottom:15px;
     }
     #art{
-        background-color:#FFF;
         padding-left:30px;
         padding-right:30px;
         padding-bottom:30px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
         width:80%;
+        border-radius: 5px;
+        background-color: #FFF;
     }
     #desc{
         font-family: "Times New Roman", Times, serif;
@@ -32,6 +33,16 @@
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
+     hr.halfFaded{ 
+        border: 0; 
+        height: 1px; 
+        margin-top:0;
+        margin-bottom:5px;
+        background-image: -webkit-linear-gradient(left,#8c8b8b, white, white);
+        background-image: -moz-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -ms-linear-gradient(left,  #8c8b8b, white, white);
+        background-image: -o-linear-gradient(left, #8c8b8b, white, white); 
+    }
     #tagsLines{ 
         border: 0; 
         height: 1px; 
@@ -41,11 +52,10 @@
     .left {
         position:fixed;
         left: 0; top: 60px; bottom: 0;
-        min-width: 230px;
+        min-width: 170px;
         max-width: 25%;
     }
     .tagsWell{
-        min-height: 50px;
         padding: 0px;
         margin-bottom: 5px;
         background-color: #bce1ff;
@@ -53,10 +63,7 @@
         border-radius: 4px;
         -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-        min-width: 230px;
-        max-width: 25%;
     }
-
     .main {
         position: fixed;
         left:232px; top:60px; right:0; bottom:0;
@@ -71,59 +78,53 @@
 
     }
 </style>
-<form  style="overflow:auto" method="post" action="/allproblems/sorted" class="left" >
-    <div class="tagsWell" style="position:relative">
-        <legend style="font-weight:bold" class="legend">Категории</legend>
-            <div id="tagList" class="content hideContent" tabindex="100">
-                <ul class="items">
-                    {{#each tags}}
-                        <li id="menu"><input type="checkbox" name="tag" value={{this.title}}> {{this.title}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="show-more">
-                <a style="text-decoration:none;">Покажи още</a>
-            </div>
-            <hr id="tagsLines">
-            <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
-            <div>
-                <span style="font-weight:bold" class="legend">Подреди по</span>
-            </div>
-            <div>
-                <ul class="items" id="menu">
-                    <li><input name="sortBy" type='radio' value="distance"> Близост</li>
-                    <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
-                    <li><input name="sortBy" type='radio' value="new"> Най-нови</li>
-                    <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
-                </ul>
-            </div>
-            <hr id="tagsLines">
-            <div>
-                <button  type="submit">Филтрирай</button>
-            </div>
-            <hr id="tagsLines">
-            
-        </div>
-        
-</form>
-<div class="container body-content main">
+<div class="container body-content main" style="overflow:scroll;">
     <div class="row">
-        <div style="overflow:auto">
+        <div class="col-sm-1">
+            <form method="post" action="/allproblems/sorted" class="left">
+            <div class="tagsWell" style="position:relative;margin=0;">
+                <legend style="font-weight:bold" class="legend">Категории</legend>
+                    <div id="tagList" class="content hideContent" tabindex="100">
+                        <ul class="items">
+                            {{#each tags}}
+                                <li id="menu"><input type="checkbox" name="tag" value={{this.title}}> {{this.title}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="show-more">
+                        <a style="text-decoration:none;">Покажи още</a>
+                    </div>
+                    <hr id="tagsLines">
+                    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                    <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
+                    <div>
+                        <span style="font-weight:bold" class="legend">Подреди по</span>
+                    </div>
+                    <div>
+                        <ul class="items" id="menu">
+                            <li><input name="sortBy" type='radio' value="distance"> Близост</li>
+                            <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
+                            <li><input name="sortBy" type='radio' value="new"> Най-нови</li>
+                            <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
+                        </ul>
+                    </div>
+                    <hr id="tagsLines">
+                    <div>
+                        <button  type="submit">Филтрирай</button>
+                    </div>
+                    <hr id="tagsLines">             
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-11">
             {{#each problems}}
-            <article id="art">
-                <table width="100%" >
-                    <tr>
-                        <td>
-                            <header style="padding-bottom:0px;">
-                                <h2><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
-                                <p>Публикувано на: {{this.formattedDate}}<br>
-                                   Категория: <b>{{this.tag}}</b>     Точки: <span id="points"><b>{{this.points}}</b></span></p>
-                            </header>
-                            <hr>
-                        </td>
-                    </tr>
-                </table>
+            <article id="art" style="margin-top:10px;">
+                <header style="padding-bottom:0px;padding-top:5px;">
+                    <h2 style="margin-bottom:0;"><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
+                    <p style="margin-bottom:0;">Публикувано на: {{this.formattedDate}}<br>
+                        Категория: <b>{{this.tag}}</b>     Точки: <span id="points"><b>{{this.points}}</b></span></p>
+                </header>
+                <hr class="halfFaded">
 
                 <p id="desc">Описание:<br>
                 {{this.description}}</p>
@@ -132,5 +133,4 @@
             </article>
             {{/each}}
         </div>
-    </div>
 </div>

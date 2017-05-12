@@ -16,7 +16,8 @@ let userSchema = mongoose.Schema(
         lat: { type: Number },
         lng: { type: Number },
         role: { type: ObjectId, ref: 'Role' },
-        profpicture: { type: String }
+        profpicture: { type: String },
+        isAdmin: {type: Number}
     }
 );
 
@@ -51,7 +52,8 @@ module.exports.initialize = () => {
                 fullName: 'Admin',
                 role: role.id,
                 salt: salt,
-                passwordHash: passwordHash
+                passwordHash: passwordHash,
+                isAdmin: 1
             };
             User.create(adminUser).then(user => {
                 role.users.push(user.id);

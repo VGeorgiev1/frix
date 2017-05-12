@@ -193,7 +193,7 @@
                         <span class="points">{{problem.points}}</span>
                     </span>
                     <button style="float:right;"><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
-                    </b>
+                    </b> {{/if}}
                 </div>
             </article>
         </div>
@@ -226,6 +226,7 @@
     </div>
     {{/each}}
     <hr class="coolLine"> {{#each solutions}}
+    <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p>
     <div class="row">
         <article id="art">
             <table width="100%">
@@ -275,6 +276,6 @@
         </script>
         <script type="text/javascript" src="/javascripts/map.js"></script>
         <script>
-            map.setCenter(userLocation);
-            map.setZoom(15);
+                    map.setCenter(userLocation);
+                    map.setZoom(15);
         </script>

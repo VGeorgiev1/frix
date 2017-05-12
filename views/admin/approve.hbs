@@ -1,33 +1,59 @@
 <style>
-    #imgur {
-        max-width: 50%;
+    .imgur{
+        width:200px;
+        height:auto;
     }
-
-    a {
-        color: black;
-    }
-
-    #art {
+    .well{
+        border-radius: 5px;
         background-color: #FFF;
-        padding: 20px;
+        padding:15px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
+    input[type="password"], input[type="text"], textarea{
+        background-color:#F8F8F8
+    }
+    hr.fadingLine{
+        border: 0;
+        height: 1px;
+        margin-top:0;
+        margin-bottom:5px;
+        background-image: -webkit-linear-gradient(left,#8c8b8b, white, white);
+        background-image: -moz-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -ms-linear-gradient(left,  #8c8b8b, white, white);
+        background-image: -o-linear-gradient(left, #8c8b8b, white, white);
+    }
+    h1{
+        font-size:3.4em;
+        margin-bottom:0;
+        margin-top:0px;
+    }
 </style>
-<div class="container body-content">
-    <div class="row">
-        <div class="col-md-12">
-            <article>
-                {{#each users}}
-                <p>{{this.fullName}}</p>
-                <p>{{this.email}}</p>
-                <p>{{this.id}}</p>
-                <form action="/admin/approve/{{this.id}}" method="post">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-                {{/each}}
 
-            </article>
-        </div>
-    </div>
+<div class="container body-content span=8 offset=2">
+
+    {{#each users}}
+
+            <div class="well">
+                <header>
+                    <h1>{{this.fullName}}</h1>
+                    <hr class="fadingLine">
+                </header>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{{user.profpicture}}" alt="profile pic" class="imgur"></img>
+                    </div>
+                    <div class="col-sm-7">
+                        <p style="font-size:1.6em;"><b>Email:</b> {{this.email}}<br>
+                            <b>Full Name:</b> {{this.fullName}}<br>
+                            <b>Description:</b> {{this.description}}</p>
+                    </div>
+                </div>
+                <form method="post" action="/admin/approve/{{this.id}}">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+    {{/each}}
+
 </div>
