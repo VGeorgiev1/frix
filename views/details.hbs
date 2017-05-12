@@ -10,7 +10,7 @@
         word-wrap: break-word;*/
         border-radius: 5px;
         background-color: #FFF;
-        padding: 20px;
+        padding:15px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
@@ -106,20 +106,16 @@
     <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
-        <img src="{{this.author.profpicture}}" class="col-sm-1" alt="profile pic" height="70" width="80">
-        <div class="col-sm-11">
-            <blockquote class="col-sm-11" id="commentBox">
+        <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="70" width="80"></span>
+        <span class="col-sm-10" style="display:inline;">
+            <blockquote id="commentBox">
                 <div class="row" style="margin-bottom:5px;">
-                    <div class="col-sm-3">
-                        <b>{{this.author.fullName}}</b>
-                    </div>
-                    <div class="col-sm-9">
-                        <p style="text-align:right;font-size:0.8em;">{{this.date}}</p>
-                    </div>
+                    <b class="col-sm-3">{{this.author.fullName}}</b>
+                    <p class="col-sm-8" style="text-align:right;font-size:0.7em;">{{this.date}}</p>
                 </div>
                 {{this.text}}
             </blockquote>
-        </div>
+        </span>
     </div>
     {{/each}}
 </div>
