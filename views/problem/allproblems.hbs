@@ -44,13 +44,10 @@
                         <td>
                             <header style="padding-bottom:0px;">
                                 <h2><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
-                                <p>Posted on: {{this.formattedDate}}</p>
+                                <p>Posted on: {{this.formattedDate}}<br>
+                                   Tag: <b>{{this.tag}}</b>     Points: <span id="points"><b>{{this.points}}</b></span></p>
                             </header>
                             <hr>
-                        </td>
-                        <td align="right">
-                            Points: <span id="points">{{this.points}}</span>
-
                         </td>
                     </tr>
                 </table>
