@@ -2,7 +2,7 @@ const userController = require('./../controllers/user');
 const homeController = require('./../controllers/home');
 const problemController = require('./../controllers/problems');
 const tagsController = require('./../controllers/tags');
-const adminController=require('./../controllers/admin');
+const adminController = require('./../controllers/admin');
 module.exports = (app) => {
 
     app.get('/', homeController.index);
@@ -29,7 +29,7 @@ module.exports = (app) => {
     app.post("/resetvote/:id", problemController.resetvote);
 
     app.get("/allproblems", problemController.allproblemsGet);
-    
+
     app.get("/user/details", userController.detailsGet);
 
     app.get("/admin/approve", adminController.approveGet);
@@ -39,4 +39,6 @@ module.exports = (app) => {
     app.post("/user/settings", userController.settingsPost);
     app.post("/allproblems/sorted", problemController.sortedPost);
 
+    app.get('/problem/solution/:id', problemController.addSolutionGet);
+    app.post('/problem/solution/:id', problemController.addSolutionPost);
 };

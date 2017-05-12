@@ -1,6 +1,6 @@
 const User = require('mongoose').model('User');
-const Role=require('mongoose').model('Role');
-const Unapproved=require('mongoose').model('Unapproved');
+const Role = require('mongoose').model('Role');
+const Unapproved = require('mongoose').model('Unapproved');
 
 
 
@@ -13,18 +13,18 @@ module.exports = {
 
     registerPost: (req, res) => {
         let registerArgs = req.body;
-        let filename="";
-        let image=req.files.image;
-        if(image){
-            filename=req.body.email+'_'+image.name;
+        let filename = "";
+        let image = req.files.image;
+        if (image) {
+            filename = req.body.email + '_' + image.name;
             image.mv(`./public/images/${filename}`, err => {
-                if(err){
+                if (err) {
                     console.log(err.message);
                 }
             });
         }
         else {
-            filename="facebook-default-no-profile-pic.jpg";
+            filename = "facebook-default-no-profile-pic.jpg";
         }
         User.findOne({ email: registerArgs.email }).then(user => {
             let errorMsg = '';
@@ -38,54 +38,75 @@ module.exports = {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
             } else {
-               
+
                 let salt = encryption.generateSalt();
                 let passwordHash = encryption.hashPassword(registerArgs.password, salt);
-                Role.findOne({name: 'User'}).then(role => {
-                    let userObject={};
-                   if(req.body.description){
+                Role.findOne({ name: 'User' }).then(role => {
+                    let userObject = {};
+                    if (req.body.description) {
+
+                        Role.findOne({ name: 'Unapproved' }).then(role => {
+                            console.log("im in");
+                            userObject = {
+                                email: registerArgs.email,
+                                passwordHash: passwordHash,
+                                fullName: registerArgs.fullName,
+                                salt: salt,
+                                role: role.id,
+                                profpicture: `/images/${filename}`,
+                                description: req.body.description
+                            }
+                            User.create(userObject).then(user => {
+
+                                req.logIn(user, (err) => {
+                                    role.users.push(user.id);
+                                    role.save();
+
+
+
+                                    if (err) {
+                                        registerArgs.error = err.message;
+                                        res.render('user/register', registerArgs);
+                                        return;
+                                    }
+                                    res.redirect('/')
+                                })
+                            })
+
+                        });
+                    }
+                    else {
                         userObject = {
-                        email: registerArgs.email,
-                        passwordHash: passwordHash,
-                        fullName: registerArgs.fullName,
-                        salt: salt,
-                        role: role.id,
-                        profpicture: `/images/${filename}`,
-                        description : req.body.description
-                    };
+                            email: registerArgs.email,
+                            passwordHash: passwordHash,
+                            fullName: registerArgs.fullName,
+                            salt: salt,
+                            role: role.id,
+                            profpicture: `/images/${filename}`
+                        };
                     }
-                   else{
-                         userObject = {
-                        email: registerArgs.email,
-                        passwordHash: passwordHash,
-                        fullName: registerArgs.fullName,
-                        salt: salt,
-                        role: role.id,
-                        profpicture: `/images/${filename}`
-                    };
-                    }
-                User.create(userObject).then(user => {
+                    User.create(userObject).then(user => {
 
-                    req.logIn(user, (err) => {
-                        role.users.push(user.id);
-                        role.save();
-                        if(req.body.regtype=="Organisation"){
-                            console.log(user.id);
+                        req.logIn(user, (err) => {
+                            role.users.push(user.id);
+                            role.save();
 
-                            let obj={
-                                usersnot: user.id
-                            };
-                            Unapproved.create(obj);
-                        }
-                        if (err) {
-                            registerArgs.error = err.message;
-                            res.render('user/register', registerArgs);
-                            return;
-                        }
-                        res.redirect('/')
+
+                            if (req.body.regtype == "Organisation") {
+                                Role.findOne({ name: 'Unapproved' }).then(role => {
+                                    role.users.push(user.id);
+                                    role.save();
+                                })
+                            }
+                            if (err) {
+                                registerArgs.error = err.message;
+                                res.render('user/register', registerArgs);
+                                return;
+                            }
+                            res.redirect('/')
+                        })
                     })
                 })
-            })
             }
         })
     },

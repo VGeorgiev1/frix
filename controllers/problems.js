@@ -18,7 +18,6 @@ module.exports = {
     },
     createPost: (req, res) => {
         let parts = req.body;
-        console.log(typeof req.body.tag);
         let errorMsg = '';
         if (!req.isAuthenticated()) {
             errorMsg = 'Sorry you must be logged in!';
@@ -273,5 +272,68 @@ module.exports = {
             });
         }
 
+    },
+    addSolutionGet: (req, res) => {
+        res.render("problem/addsolution", { id: req.params.id });
+    },
+    addSolutionPost: (req, res) => {
+        let parts = req.body;
+        let errorMsg = '';
+        if (!req.isAuthenticated()) {
+            errorMsg = 'Sorry you must be logged in!';
+        }
+        else if (!req.body.description) {
+            errorMsg = 'Content is required';
+        }
+        else if (!req.files.image) {
+            errorMsg = 'Picture is required';
+        }
+        if (errorMsg) {
+            res.render('problem/create', {
+                error: errorMsg
+            });
+            return;
+        }
+        parts.author = req.user.id;
+        let image = req.files.image;
+        let filenameAndExt = image.name;
+
+        let filename = filenameAndExt.substr(0, filenameAndExt.lastIndexOf('.'));
+        let exten = filenameAndExt.substr(filenameAndExt.lastIndexOf('.') + 1);
+
+        let rnd = require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
+        let finalname = `${filename}_${rnd}.${exten}`;
+
+
+
+        image.mv(`./public/solutionpictures/${finalname}`, err => {
+            if (err) {
+                console.log(err.message);
+            }
+        });
+        parts.points = 0;
+        parts.picture = `/solutionpictures/${finalname}`;
+        parts.formattedDate = "test";
+
+        Problem.findById(req.params.id).then(problem => {
+
+            /*let formattedDate = Date.now().toString();
+            console.log(formattedDate);
+            formattedDate = formattedDate.substr(0, formattedDate.indexOf("GMT"));
+            parts.formattedDate = formattedDate;*/
+            console.log("problem", problem);
+            problem.solutions.push(parts);
+            console.log("after push", problem);
+            problem.save(err => {
+                if (err) {
+                    res.render(`/problem/solution/${req.params.id}`, {
+                        error: err.message
+                    });
+                }
+                else {
+                    res.redirect(`/details/${req.params.id}`);
+                }
+            })
+        })
     }
 };

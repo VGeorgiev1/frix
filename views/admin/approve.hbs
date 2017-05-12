@@ -1,13 +1,15 @@
 <style>
-    #imgur{
+    #imgur {
         max-width: 50%;
     }
-    a{
-        color:black;
+
+    a {
+        color: black;
     }
-    #art{
-        background-color:#FFF;
-        padding:20px;
+
+    #art {
+        background-color: #FFF;
+        padding: 20px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
@@ -16,14 +18,14 @@
     <div class="row">
         <div class="col-md-12">
             <article>
-            {{#each users}}
-                <p>{{this.usersnot.fullName}}</p>
-                <p>{{this.usersnot.email}}</p>
-                <p>{{this.usersnot.id}}</p>
-                <form action="/admin/approve/{{this.usersnot.id}}" method="post">
+                {{#each users}}
+                <p>{{this.fullName}}</p>
+                <p>{{this.email}}</p>
+                <p>{{this.id}}</p>
+                <form action="/admin/approve/{{this.id}}" method="post">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            {{/each}}
+                {{/each}}
 
             </article>
         </div>
