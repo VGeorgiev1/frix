@@ -1,14 +1,14 @@
-
-
-
 <style type="text/css">
+
+
     #map {
-       width: 100%;
-       height: 450px;
+        width: 100%;
+        height: 450px;
         display: block;
         margin: auto;
         margin-bottom: 15px;
     }
+
     .hidden {
         display: none
     }
@@ -24,6 +24,7 @@
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
+
     img {
         border: 1px outset grey;
         border-radius: 2px;
@@ -249,8 +250,8 @@
             map.setCenter(userLocation);
             map.setZoom(15);
         </script>
-    {{#unless isAuthenticated }}
-    <script>
-        $(".accept").css("display", "none");
-    </script>
-    {{/unless}}
+        {{#unless isAuthenticated }}
+        <script>
+            $(".accept").css("display", "none");
+        </script>
+        {{/unless}}

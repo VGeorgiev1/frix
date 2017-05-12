@@ -113,15 +113,15 @@ module.exports = {
             //console.log(problem.solutions[0].author);
 
             User.findById(problem.author).then(problemauthor => {
-                let isAuthicated = false;
+                let isAuthenticated = false;
                 if (problem.author.id == req.user.id) {
 
-                    isAuthicated = true;
+                    isAuthenticated = true;
 
                 }
 
                 if (problem.comments.length == 0) {
-                    res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthicated });
+                    res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthenticated });
                 }
 
                 problem.comments.forEach(function (comment, idx, array) {
