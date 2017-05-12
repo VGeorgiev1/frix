@@ -1,23 +1,9 @@
-<style>
-    #imgur{
-        max-width: 50%;
-    }
-    a{
-        color:black;
-    }
-    #art{
-        background-color:#FFF;
-        padding:20px;
-        box-shadow: 0 0 10px darkgrey;
-        margin-bottom: 10px;
-    }
-</style>
 <div class="container body-content">
     <div class="row">
         <div class="col-md-12">
 
             {{#each filtered}}
-            <article id="art">
+            <article id="artSorted">
                 <table width="100%">
                     <tr>
                         <td>
@@ -42,7 +28,7 @@
     </div>
 </div>
 <form method="post" action="allproblems/sorted">
-    <div class="tagsWell" style="position:relative">
+    <div class="tagsWell">
         <legend style="font-weight:bold">Тагове</legend>
             <div id="tagList" class="content hideContent" tabindex="100">
                 <ul class="items">
