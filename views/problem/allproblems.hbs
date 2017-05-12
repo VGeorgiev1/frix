@@ -4,10 +4,13 @@
     }
     a{
         color:black;
+        padding-bottom:15px;
     }
     #art{
         background-color:#FFF;
-        padding:20px;
+        padding-left:15px;
+        padding-right:15px;
+        padding-bottom:15px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
@@ -21,8 +24,9 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <header>
+                            <header style="padding-bottom:20px;">
                                 <h2><a href="/details/{{this.id}}" style="text-decoration:none">{{this.title}}</a></h2>
+                                <p>Posted on: {{this.formattedDate}}</p>
                             </header>
                         </td>
                         <td align="right">
@@ -32,8 +36,8 @@
                     </tr>
                 </table>
 
-
-                <p>{{this.description}}</p>
+                <p>Description:<br>
+                {{this.description}}</p>
 
                 <img src="{{this.picture}}" id="imgur">
             </article>
