@@ -1,3 +1,10 @@
+{{#if isAuthicated}}
+<script>
+    alert("me")
+</script>
+{{/if}}
+
+
 <style type="text/css">
     textarea {
         max-width: 100%;
@@ -253,7 +260,7 @@
             <img src="{{this.picture}}" id="imgur">
         </article>
         {{#if isAuthicated}}
-            <p>Okey</p>
+        <p>Okey</p>
         {{/if}}
         </div>
         {{/each}}
