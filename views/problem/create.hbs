@@ -21,6 +21,10 @@
         display:inline;
         padding:0 80%;
     }
+    #tagList{
+        max-width:300px;
+        padding-left:40%;"
+    }
     .well{
         border-radius: 5px;
         background-color: #FFF;
@@ -81,22 +85,18 @@
                         <input class="form-control" id="image" type="file" name="image" style="background-color:#F8F8F8;">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12" style="max-width:300px;padding-left:40%;">
-                        <div  id="tagList" class="content hideContent" tabindex="100">
-                        <ul class="items">
-                            {{#each tags}}
-                                <li id="itemli"><input title={{this.description}} type="radio" name="tag" value={{this.title}}> {{this.title}}</li>
-                            {{/each}}
-                        </ul>
-                        </div>
-                        <div class="show-more">
-                            <a style="text-decoration:none;">Покажи още</a>
-                        </div>
-                        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                        <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
-                    </div>
+                <div  id="tagList" class="content hideContent" tabindex="100">
+                <ul class="items">
+                    {{#each tags}}
+                        <li id="itemli"><input title={{this.description}} type="radio" name="tag" value={{this.title}}> {{this.title}}</li>
+                    {{/each}}
+                </ul>
                 </div>
+                <div class="show-more">
+                    <a style="text-decoration:none;">Покажи още</a>
+                </div>
+                <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
                
                 <div style="text-align:center;">
                         <button type="reset" class="btn btn-default">Отмени</button>
