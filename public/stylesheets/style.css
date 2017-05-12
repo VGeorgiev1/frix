@@ -7056,22 +7056,6 @@ div.text-container {
     margin: 0 auto;
     width: 75%;    
 }
-
-.hideContent {
-    overflow: hidden;
-    line-height: 1em;
-    height: 5em;
-    color: #2C3E50;
-}
-
-.showContent {
-    line-height: 1em;
-    height: auto;
-}
-.showContent{
-    height: auto;
-}
-
 h1 {
     font-size: 24px;        
 }
