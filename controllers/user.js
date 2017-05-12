@@ -13,7 +13,6 @@ module.exports = {
 
     registerPost: (req, res) => {
         let registerArgs = req.body;
-        console.log("wtf");
         let filename="";
         let image=req.files.image;
         if(image){

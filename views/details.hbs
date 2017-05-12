@@ -1,6 +1,5 @@
 <script>
     id = "{{problem.id}}";
-
 </script>
 <style>
     #commentBox {
@@ -14,11 +13,9 @@
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
-
     #imgur {
         max-width: 50%;
     }
-
     #comment,
     #descBox {
         width: 92%;
@@ -31,12 +28,16 @@
         margin-bottom: 10px;
         border-radius: 5px;
     }
-
+    #comment{
+        padding:10px;
+    }
+    #voting{
+        font-size:1.2em;
+    }
     .active {
         background-color: green;
         color: red;
     }
-
     hr {
         padding: 0;
         border: none;
@@ -44,7 +45,6 @@
         color: #0000CD;
         text-align: center;
     }
-
     hr:after {
         content: "§";
         display: inline-block;
@@ -74,7 +74,7 @@
 
                 <div id="descBox">
                     <div class="row">
-                        <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="70" width="80">
+                        <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="80" width="90">
                         <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.formattedDate}}</p>
                     </div>
                     <i>Description:</i>
@@ -84,19 +84,21 @@
                 </div>
                 <div style="margin-bottom:20px;">
                     {{#if user}}
+                    <b id="voting">Vote:
                     <button id="upvote">▲</button>
                     <button id="downvote">▼</button> {{/if}}
                     <span id="points">Points:{{problem.points}}</span>
+                    </b>
                 </div>
             </article>
         </div>
 
     </div>
     {{#if user}}
-    <div style="margin-bottom:50px;">
+    <div style="margin-bottom:40px;">
         <form method='post'>
-            <p style="font-size:2em;">Comment:</p>
-            <textarea class="col-l-12" name='comment' id='comment'></textarea><br />
+            <p style="font-size:1.7em;">Leave a comment:</p>
+            <textarea class="col-l-12" name='comment' id='comment' placeholder="Type here..."></textarea><br />
 
             <input type='submit' value='Submit' />
         </form>
@@ -106,7 +108,7 @@
     <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
-        <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="70" width="80"></span>
+        <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="80" width="90"></span>
         <span class="col-sm-10" style="display:inline;">
             <blockquote id="commentBox">
                 <div class="row" style="margin-bottom:5px;">
