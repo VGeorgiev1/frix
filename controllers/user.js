@@ -13,10 +13,7 @@ module.exports = {
 
     registerPost: (req, res) => {
         let registerArgs = req.body;
-        if(req.body.regtype=="Organisation"){
-            console.log("zdr");
-           // Unapproved.create(user.id);
-        }
+        console.log("wtf");
         let filename="";
         let image=req.files.image;
         if(image){
@@ -42,12 +39,24 @@ module.exports = {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
             } else {
-
+               
                 let salt = encryption.generateSalt();
                 let passwordHash = encryption.hashPassword(registerArgs.password, salt);
                 Role.findOne({name: 'User'}).then(role => {
-
-                    let userObject = {
+                    let userObject={};
+                   if(req.body.description){
+                        userObject = {
+                        email: registerArgs.email,
+                        passwordHash: passwordHash,
+                        fullName: registerArgs.fullName,
+                        salt: salt,
+                        role: role.id,
+                        profpicture: `/images/${filename}`,
+                        description : req.body.description
+                    };
+                    }
+                   else{
+                         userObject = {
                         email: registerArgs.email,
                         passwordHash: passwordHash,
                         fullName: registerArgs.fullName,
@@ -55,7 +64,7 @@ module.exports = {
                         role: role.id,
                         profpicture: `/images/${filename}`
                     };
-
+                    }
                 User.create(userObject).then(user => {
 
                     req.logIn(user, (err) => {

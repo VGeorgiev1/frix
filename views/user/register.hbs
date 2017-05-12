@@ -35,13 +35,19 @@
                         <input class="form-control" id="image" type="file" name="image">
                     </div>
                 </div>
-                <div>
-                    <input type="radio" name="regtype" value="User" checked>User<br>
-                    <input type="radio" name="regtype" value="Organisation">Organisation<br>
+                <div class="form-group">
+                    <input type="radio" name="regtype" value="User"  onclick="$('#description').attr('style','display:none')" checked>User<br>
+                    <input type="radio" name="regtype" value="Organisation" onclick="$('#description').attr('style','display:inline')">Organisation<br>
+                </div>
+                <div class="form-group" style="display:none" id="description">
+                    <label class="col-sm-4 control-label" for="inputFullName">Description:</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="inputFullName" placeholder="Description"  name="description" value={{fullName}}>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="reset" class="btn btn-default" >Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
