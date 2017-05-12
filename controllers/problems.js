@@ -5,18 +5,25 @@ const Tags = require('mongoose').model('Tags');
 
 function vote(req, res, amount) {
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
-        res.json(prob.points);
+        if (prob != null) {
+            res.json(prob.points);
+        }
     });
-    Problem.find({
+    Problem.findOne({
         solutions:
         {
             $elemMatch:
             {
-                _id: ObjectId("59160a950abe481200c6d5d3")
+                _id: req.params.id
             }
         }
-    }, { new: true }, function (err, prob) {
-        res.json(prob.points);
+    }, (err, prob) => {
+        if (prob != null) {
+            prob.solutions[prob.solutions.indexOf(prob.solutions.filter(i => i._id == req.params.id)[0])].points += amount;
+            prob.save(() => {
+                res.json(prob.solutions.filter(i => i._id == req.params.id)[0].points);
+            });
+        }
     });
 }
 
@@ -103,7 +110,7 @@ module.exports = {
     detailsGet: (req, res) => {
         let id = req.params.id;
         Problem.findById(id).populate('comments').populate('solutions.author').populate('author').then(problem => {
-           //console.log(problem.solutions[0].author);
+            //console.log(problem.solutions[0].author);
 
             User.findById(problem.author).then(problemauthor => {
 
@@ -146,7 +153,6 @@ module.exports = {
 
 
     },
-
 
     upvote: (req, res) => {
         if (req.user === undefined) {

@@ -38,6 +38,24 @@
                         {{/unless}}
                     </ul>
                 </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">   
+                            {{#if user}}<li><a href="/user/details">Добре дошли({{user.fullName}})</a></li> {{/if}}                       
+                            <li><a href="/">Начало</a></li>
+                            {{#if user.isAdmin}}
+                            <li><a href="/admin/approve">Одобри кандидатура</a></li>
+                            {{/if}}
+                            <li><a href="/allproblems">Всички проблеми</a></li>
+                            {{#if user}}
+                            <li><a href="/problem/create">Нов проблем</a></li>
+                            <li><a href="/user/logout">Излез</a></li>
+                            {{/if}}
+                            {{#unless user}}
+                            <li><a href="/user/register">Регистрирай се</a></li>
+                            <li><a href="/user/login">Влез</a></li>
+                            {{/unless}}
+                        </ul>
+                    </div>
             </div>
         </div>
     </header>

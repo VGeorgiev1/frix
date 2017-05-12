@@ -1,7 +1,3 @@
-<script>
-    id = "{{problem.id}}";
-    
-</script>
 <style type="text/css">
     #map {
        width: 100%;
@@ -9,6 +5,109 @@
         display: block;
         margin: auto;
         margin-bottom: 15px;
+    }
+    .hidden {
+        display: none
+    }
+
+    #commentBox {
+        /*border-radius: 25px;
+        border: 2px solid #6495ED;
+        padding: 20px;
+        word-wrap: break-word;*/
+        border-radius: 5px;
+        background-color: #FFF;
+        padding: 15px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+    }
+    img {
+        border: 1px outset grey;
+        border-radius: 2px;
+    }
+
+    .profPic {
+        height: 90px;
+        width: 90px;
+    }
+
+    #comment,
+    #descBox {
+        font-size: 1.2em;
+        border: 8px outset #6495ED;
+        margin-bottom: 20px;
+        background-color: #FFF;
+        padding: 20px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    #comment {
+        padding: 10px;
+    }
+
+    #voting {
+        font-size: 1.2em;
+    }
+
+    #descCore {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 1.4em;
+    }
+
+    .active {
+        background-color: green;
+        color: red;
+    }
+
+    hr.coolLine {
+        padding: 0;
+        border: none;
+        border-top: medium double #0000CD;
+        color: #0000CD;
+        text-align: center;
+    }
+
+    hr.coolLine:after {
+        content: "§";
+        display: inline-block;
+        position: relative;
+        top: -0.7em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: #ECF0F1;
+    }
+
+    hr.fadingLine {
+        border: 0;
+        height: 1px;
+        margin-top: 0;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    }
+
+    hr.halfFaded {
+        border: 0;
+        height: 1px;
+        margin-top: 0;
+        margin-bottom: 5px;
+        background-image: -webkit-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -moz-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -ms-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -o-linear-gradient(left, #8c8b8b, white, white);
+    }
+
+
+    #desc {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 1.4em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 </style>
 
@@ -35,18 +134,21 @@
                     <p id="descCore"><i>Описание:</i><br> {{problem.description}}
                     </p>
                     <div class="row">
-                        <div class="col-sm-7"><img src="{{problem.picture}}" id="imgur2"></div>
+                        <div class="col-sm-7"><img src="{{problem.picture}}" id="imgur"></div>
                         <div class="col-sm-4">
                             <div id="map"></div>
                         </div>
                     </div>
                 </div>
                 <div style="margin-bottom:20px;">
-                    {{#if user}}
-                    <b id="voting">Гласувай:
-                    <button id="upvote">▲</button>
-                    <button id="downvote">▼</button> {{/if}}
-                    <span id="points">Точки:{{problem.points}}</span>
+                    <b class="voting"> 
+                        <span>         
+                    <span>Гласувай:</span>
+                    <button class="upvote" voteid="{{problem.id}}">▲</button>
+                    <button class="downvote" voteid="{{problem.id}}">▼</button>
+                        Точки:
+                        <span class="points">{{problem.points}}</span>
+                    </span>
                     <button style="float:right;"><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
                     </b>
                 </div>
@@ -81,6 +183,7 @@
     </div>
     {{/each}}
     <hr class="coolLine"> {{#each solutions}}
+    <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p>
     <div class="row">
         <article id="art">
             <table width="100%">
@@ -92,23 +195,30 @@
                             <div class="row" style="margin-top:10px;margin-bottom:0px;">
                                 <div class="col-sm-1"><img src="{{this.author.profpicture}}" class="profPic" /></div>
                                 <div class="col-sm11">
-                                    <p style="font-size:1.3em;">Публикувано на: {{this.formattedDate}}<br> Предложено от: <b>{{this.author.fullName}}</b><br>                                        Точки: <span id="points"><b>{{this.points}}</b></span></p>
+                                    <p style="font-size:1.3em;">Публикувано на: {{this.formattedDate}}<br> Предложено от: <b>{{this.author.fullName}}</b><br>
                                 </div>
                                 <div>
                         </header>
                         <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
                     </td>
+                    <td>
+                        <span>
+                            <span>Гласувай:</span>
+                        <button class="upvote" voteid="{{this.id}}">▲</button>
+                        <button class="downvote" voteid="{{this.id}}">▼</button> Точки:
+                        <span class="points">{{this.points}}</span>
+                        </span>
+                    </td>
                 </tr>
             </table>
             <p id="desc">Описание:<br> {{this.description}}
             </p>
-
-            <img src="{{this.picture}}" id="imgur2">
+            <img src="{{this.picture}}" id="imgur">
         </article>
-    </div>
+        </div>
         {{/each}}
 
-</div>
+        </div>
         <script src="/javascripts/voting.js">
 
         </script>

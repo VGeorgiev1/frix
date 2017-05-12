@@ -7063,3 +7063,15 @@ h1 {
 p {
     padding: 5px 0;
 }
+
+.show-more {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.items{
+   columns: 2;
+   column-width: 100px;
+   -webkit-padding-start: 20px;
+}
+
