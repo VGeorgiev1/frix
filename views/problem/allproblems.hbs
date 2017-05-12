@@ -32,8 +32,58 @@
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
+    .left {
+        position:fixed;
+        left: 0; top: 60px; bottom: 0;
+        min-width: 200px;
+        max-width: 18%;
+    }
+    .main {
+        position: absolute;
+        left:178px; top:92px; right:0; bottom:0;
+    }
+    li{
+        list-style-type: none;
+    }
+    .legend{
+        -webkit-padding-start: 10px;
+
+    }
 </style>
-<div class="container body-content">
+<form method="post" action="/allproblems/sorted" class="left">
+    <div class="tagsWell" style="position:relative">
+        <legend style="font-weight:bold" class="legend">Тагове</legend>
+            <div id="tagList" class="content hideContent" tabindex="100">
+                <ul class="items">
+                    {{#each tags}}
+                        <li id="menu"><input type="checkbox" name="tag" value={{this.title}}> {{this.title}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="show-more">
+                <a>Show more tags</a>
+            </div>
+            <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
+            <div>
+                <span style="font-weight:bold" class="legend">Подреди по</span>
+            </div>
+            <div>
+                <ul class="items" id="menu">
+                    <li><input name="sortBy" type='radio' value="distance"> Близост</li>
+                    <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
+                    <li><input name="sortBy" type='radio' value="new"> Най-нови</li>
+                    <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
+                </ul>
+            </div>
+            <div>
+                <button  type="submit" style="position:absolute; left: 40%;">Филтрирай</button>
+            </div>
+            
+    </div>
+</div>
+</form>
+<div class="container body-content main">
     <div class="row">
         <div class="col-md-12">
 
@@ -64,36 +114,3 @@
         </div>
     </div>
 </div>
-<form method="post" action="/allproblems/sorted">
-    <div class="tagsWell" style="position:relative">
-        <legend style="font-weight:bold">Тагове</legend>
-            <div id="tagList" class="content hideContent" tabindex="100">
-                <ul class="items">
-                    {{#each tags}}
-                        <li><input type="checkbox" name="tag" value={{this.title}}> {{this.title}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="show-more">
-                <a>Show more tags</a>
-            </div>
-            <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
-            <div>
-                <span style="font-weight:bold">Подреди по</span>
-            </div>
-            <div>
-                <ul>
-                    <li><input name="sortBy" type='radio' value="distance"> Близост</li>
-                    <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
-                    <li><input name="sortBy" type='radio' value="new"> Най-нови</li>
-                    <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
-                </ul>
-            </div>
-            <div>
-                <button  type="submit" style="position:absolute; left: 40%;">Филтрирай</button>
-            </div>
-            
-    </div>
-</div>
-</form>

@@ -68,15 +68,6 @@
         color: #0000CD;
         text-align: center;
     }
-    hr{ 
-        border: 0; 
-        height: 1px; 
-        margin-top:0;
-        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
-    }
     hr.coolLine:after {
         content: "§";
         display: inline-block;
@@ -85,6 +76,15 @@
         font-size: 1.5em;
         padding: 0 0.25em;
         background: #ECF0F1;
+    }
+    hr.fadingLine{ 
+        border: 0; 
+        height: 1px; 
+        margin-top:0;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
     }
 </style>
 
@@ -97,7 +97,7 @@
                         <td>
                             <header>
                                 <h2 class="text-center" style="font-size:3.4em;margin-bottom:0;">{{problem.title}}</h2>
-                                <hr>
+                                <hr class="fadingLine">
                             </header>
                         </td>
                         <td align="right">
