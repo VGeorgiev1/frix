@@ -7,6 +7,17 @@ function vote(req, res, amount) {
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
         res.json(prob.points);
     });
+    Problem.find({
+        solutions:
+        {
+            $elemMatch:
+            {
+                _id: ObjectId("59160a950abe481200c6d5d3")
+            }
+        }
+    }, { new: true }, function (err, prob) {
+        res.json(prob.points);
+    });
 }
 
 module.exports = {
@@ -107,7 +118,7 @@ module.exports = {
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
                             //console.log(problem.solutions);
-                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions});
+                            res.render('details', { problem, author: problemauthor, solutions: problem.solutions });
                         }
                     });
                 }, this);
@@ -305,8 +316,6 @@ module.exports = {
 
         let rnd = require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
         let finalname = `${filename}_${rnd}.${exten}`;
-
-
 
         image.mv(`./public/solutionpictures/${finalname}`, err => {
             if (err) {
