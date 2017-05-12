@@ -265,9 +265,9 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
         <script>
             userLocation = {
-                lat: {{problem.lat }}, 
-            lng: { { problem.lng } }
-    };
+                lat: parseFloat("{{problem.lat}}"),
+                lng: parseFloat("{{problem.lng}}")
+            };
             draggable = false;
         </script>
         <script type="text/javascript" src="/javascripts/map.js"></script>
