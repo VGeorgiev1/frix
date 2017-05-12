@@ -79,13 +79,16 @@ module.exports = {
         let id = req.params.id;
         Problem.findById(id).populate('comments').then(problem => {
             User.findById(problem.author).then(problemauthor => {
+                console.log(problemauthor);
                 if (problem.comments.length == 0) {
-                    res.render('details', { problem, problemauthor });
+                    console.log(problemauthor);
+                    res.render('details', { problem, author: problemauthor });
                 }
                 problem.comments.forEach(function (comment, idx, array) {
                     User.findById(comment.author).then(commentauthor => {
                         comment.author = commentauthor;
                         if (idx === array.length - 1) {
+                         
                             res.render('details', { problem, author: problemauthor });
                         }
                     });
