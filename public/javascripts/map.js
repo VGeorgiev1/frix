@@ -58,7 +58,7 @@ function initMarker(location) {
     marker = new google.maps.Marker({
         position: location,
         map: map,
-        draggable: true //make it draggable
+        draggable: false //make it draggable
     });
     markerLocation();
     //Listen for drag events!
