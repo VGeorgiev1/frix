@@ -110,9 +110,9 @@
                         <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="90" width="90">
                         <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>
                                                                                                 {{problem.formattedDate}}<br>
-                                                                                                Tag: <b>{{problem.tag}}</b></p>
+                                                                                                Категория: <b>{{problem.tag}}</b></p>
                     </div>
-                    <p id="descCore"><i>Description:</i><br>
+                    <p id="descCore"><i>Описание:</i><br>
                     {{problem.description}}</p>
                     <div class="row">
                         <div class="col-sm-7"><img src="{{problem.picture}}" id="imgur"></div>
@@ -137,7 +137,7 @@
             <p style="font-size:1.7em;">Leave a comment:</p>
             <textarea class="col-l-12" name='comment' id='comment' placeholder="Type here..."></textarea><br />
 
-            <input type='submit' value='Submit' />
+            <input type='submit' value='Submit'/>
         </form>
     </div>
     {{/if}}

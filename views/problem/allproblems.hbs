@@ -52,7 +52,7 @@
 </style>
 <form method="post" action="/allproblems/sorted" class="left">
     <div class="tagsWell" style="position:relative">
-        <legend style="font-weight:bold" class="legend">Тагове</legend>
+        <legend style="font-weight:bold" class="legend">Категории</legend>
             <div id="tagList" class="content hideContent" tabindex="100">
                 <ul class="items">
                     {{#each tags}}
@@ -61,7 +61,7 @@
                 </ul>
             </div>
             <div class="show-more">
-                <a>Show more tags</a>
+                <a>Покажи още</a>
             </div>
             <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
@@ -94,15 +94,15 @@
                         <td>
                             <header style="padding-bottom:0px;">
                                 <h2><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
-                                <p>Posted on: {{this.formattedDate}}<br>
-                                   Tag: <b>{{this.tag}}</b>     Points: <span id="points"><b>{{this.points}}</b></span></p>
+                                <p>Публикувано на: {{this.formattedDate}}<br>
+                                   Категория: <b>{{this.tag}}</b>     Точки: <span id="points"><b>{{this.points}}</b></span></p>
                             </header>
                             <hr>
                         </td>
                     </tr>
                 </table>
 
-                <p id="desc">Description:<br>
+                <p id="desc">Описание:<br>
                 {{this.description}}</p>
 
                 <img src="{{this.picture}}" id="imgur">
