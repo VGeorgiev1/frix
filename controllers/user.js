@@ -111,7 +111,10 @@ module.exports = {
         })
     },
     detailsGet: (req, res) => {
-        res.render('user/details');
+        User.findOne({_id:req.user.id}).populate('role').then(us => {
+                console.log(us.role.name);
+            res.render('user/details', {us: us.role.name});
+        });
     },
 
     loginGet: (req, res) => {
