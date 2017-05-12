@@ -1,11 +1,19 @@
 <script>
-    id = "{{problem.id}}";
+    loggedin = false;
+
 </script>
-<style type="text/css">    
+{{#if user}}
+<script>
+    loggedin = true;
+
+</script>
+{{/if}}
+<style type="text/css">
     textarea {
-        max-width:100%;
+        max-width: 100%;
         width: 500px;
-    }          
+    }
+
     #map {
         width: 100%;
         height: 450px;
@@ -13,9 +21,11 @@
         margin: auto;
         margin-bottom: 15px;
     }
+
     .hidden {
         display: none
     }
+
     #commentBox {
         /*border-radius: 25px;
         border: 2px solid #6495ED;
@@ -23,23 +33,27 @@
         word-wrap: break-word;*/
         border-radius: 5px;
         background-color: #FFF;
-        padding:15px;
+        padding: 15px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
-    #imgur{
-        width:auto;
-        height:100%;
-        max-height:500px;
+
+    #imgur {
+        width: auto;
+        height: 100%;
+        max-height: 500px;
     }
-    img{
+
+    img {
         border: 1px outset grey;
         border-radius: 2px;
     }
-    .profPic{
-        height:90px;
-        width:90px;
+
+    .profPic {
+        height: 90px;
+        width: 90px;
     }
+
     #comment,
     #descBox {
         font-size: 1.2em;
@@ -51,20 +65,25 @@
         margin-bottom: 10px;
         border-radius: 5px;
     }
-    #comment{
-        padding:10px;
+
+    #comment {
+        padding: 10px;
     }
-    #voting{
-        font-size:1.2em;
+
+    #voting {
+        font-size: 1.2em;
     }
-    #descCore{
+
+    #descCore {
         font-family: "Times New Roman", Times, serif;
-        font-size:1.4em;
+        font-size: 1.4em;
     }
+
     .active {
         background-color: green;
         color: red;
     }
+
     hr.coolLine {
         padding: 0;
         border: none;
@@ -72,6 +91,7 @@
         color: #0000CD;
         text-align: center;
     }
+
     hr.coolLine:after {
         content: "§";
         display: inline-block;
@@ -81,45 +101,52 @@
         padding: 0 0.25em;
         background: #ECF0F1;
     }
-    hr.fadingLine{ 
-        border: 0; 
-        height: 1px; 
-        margin-top:0;
+
+    hr.fadingLine {
+        border: 0;
+        height: 1px;
+        margin-top: 0;
         background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
     }
-    hr.halfFaded{ 
-        border: 0; 
-        height: 1px; 
-        margin-top:0;
-        margin-bottom:5px;
-        background-image: -webkit-linear-gradient(left,#8c8b8b, white, white);
+
+    hr.halfFaded {
+        border: 0;
+        height: 1px;
+        margin-top: 0;
+        margin-bottom: 5px;
+        background-image: -webkit-linear-gradient(left, #8c8b8b, white, white);
         background-image: -moz-linear-gradient(left, #8c8b8b, white, white);
-        background-image: -ms-linear-gradient(left,  #8c8b8b, white, white);
-        background-image: -o-linear-gradient(left, #8c8b8b, white, white); 
+        background-image: -ms-linear-gradient(left, #8c8b8b, white, white);
+        background-image: -o-linear-gradient(left, #8c8b8b, white, white);
     }
-    a, a:hover{
-        color:black;
-        text-decoration:none;
+
+    a,
+    a:hover {
+        color: black;
+        text-decoration: none;
     }
-    a{
-        color:black;
-        padding-bottom:15px;
+
+    a {
+        color: black;
+        padding-bottom: 15px;
     }
-    #art{
-        background-color:#FFF;
-        padding-left:30px;
-        padding-right:30px;
-        padding-bottom:30px;
+
+    #art {
+        background-color: #FFF;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
-        width:80%;
+        width: 80%;
     }
-    #desc{
+
+    #desc {
         font-family: "Times New Roman", Times, serif;
-        font-size:1.4em;
+        font-size: 1.4em;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -135,7 +162,7 @@
                     <h2 class="text-center" style="font-size:3.4em;margin-bottom:0;">{{problem.title}}</h2>
                     <hr class="fadingLine">
                 </header>
- 
+
 
                 <div id="descBox">
                     <hr class="halfFaded">
@@ -143,24 +170,28 @@
                         <div class="col-sm-1">
                             <img src="{{author.profpicture}}" class="profPic" alt="profile pic">
                         </div>
-                        <p class="col-sm-3" style="font-size:1em;padding:0;"><b style="font-size:1.5em">{{author.fullName}}</b><br>
-                                                                                                {{problem.formattedDate}}<br>
-                                                                                                Категория: <b>{{problem.tag}}</b></p>
+                        <p class="col-sm-3" style="font-size:1em;padding:0;"><b style="font-size:1.5em">{{author.fullName}}</b><br> {{problem.formattedDate}}
+                            <br> Категория: <b>{{problem.tag}}</b></p>
                     </div>
                     <hr class="halfFaded">
-                    <p id="descCore"><i>Описание:</i><br>
-                    {{problem.description}}</p>
+                    <p id="descCore"><i>Описание:</i><br> {{problem.description}}
+                    </p>
                     <div class="row">
                         <div class="col-sm-7"><img src="{{problem.picture}}" id="imgur"></div>
-                        <div class="col-sm-4"><div id="map"></div></div>
+                        <div class="col-sm-4">
+                            <div id="map"></div>
+                        </div>
                     </div>
                 </div>
                 <div style="margin-bottom:20px;">
-                    {{#if user}}
-                    <b id="voting">Гласувай:
-                    <button id="upvote">▲</button>
-                    <button id="downvote">▼</button> {{/if}}
-                    <span id="points">Точки:{{problem.points}}</span>
+                    <b class="voting"> 
+                        <span>         
+                    <span>Гласувай:</span>
+                    <button class="upvote" voteid="{{problem.id}}">▲</button>
+                    <button class="downvote" voteid="{{problem.id}}">▼</button>
+                        Точки:
+                        <span class="points">{{problem.points}}</span>
+                    </span>
                     <button style="float:right;"><a href="/problem/solution/{{problem.id}}">Предложи решение!</a></button>
                     </b>
                 </div>
@@ -174,7 +205,7 @@
             <p style="font-size:1.7em;">Коментирай:</p>
             <textarea class="col-l-12" name='comment' id='comment' placeholder="Пиши тук..."></textarea><br />
 
-            <input type='submit' value='Изпрати'/>
+            <input type='submit' value='Изпрати' />
         </form>
     </div>
     {{/if}}
@@ -194,50 +225,56 @@
         </span>
     </div>
     {{/each}}
-    <hr class="coolLine">
-    {{#each solutions}}
-        <div class="row">
-            <article id="art">
-                <table width="100%" >
-                    <tr>
-                        <td>
-                            <header style="padding-bottom:0px;">
-                                <h2 style="margin-bottom:5px;font-size:2.4em;"><b>{{this.title}}</b></h2>
-                                <hr class="halfFaded">
-                                <div class="row" style="margin-top:10px;margin-bottom:0px;">
-                                    <div class="col-sm-1"><img src="{{this.author.profpicture}}" class="profPic"/></div>
-                                    <div class="col-sm11">
-                                        <p style="font-size:1.3em;">Публикувано на: {{this.formattedDate}}<br>
-                                        Предложено от: <b>{{this.author.fullName}}</b><br>
-                                        Точки: <span id="points"><b>{{this.points}}</b></span></p>
-                                    </div>
+    <hr class="coolLine"> {{#each solutions}}
+    <div class="row">
+        <article id="art">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <header style="padding-bottom:0px;">
+                            <h2 style="margin-bottom:5px;font-size:2.4em;"><b>{{this.title}}</b></h2>
+                            <hr class="halfFaded">
+                            <div class="row" style="margin-top:10px;margin-bottom:0px;">
+                                <div class="col-sm-1"><img src="{{this.author.profpicture}}" class="profPic" /></div>
+                                <div class="col-sm11">
+                                    <p style="font-size:1.3em;">Публикувано на: {{this.formattedDate}}<br> Предложено от: <b>{{this.author.fullName}}</b><br>
+                                </div>
                                 <div>
-                            </header>
-                            <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
-                        </td>
-                    </tr>
-                </table>
-                <p id="desc">Описание:<br>
-                    {{this.description}}</p>
+                        </header>
+                        <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
+                    </td>
+                    <td>
+                        <span>
+                            <span>Гласувай:</span>
+                        <button class="upvote" voteid="{{this.id}}">▲</button>
+                        <button class="downvote" voteid="{{this.id}}">▼</button> Точки:
+                        <span class="points">{{this.points}}</span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <p id="desc">Описание:<br> {{this.description}}
+            </p>
 
-                <img src="{{this.picture}}" id="imgur">
-            </article>
+            <img src="{{this.picture}}" id="imgur">
+        </article>
         </div>
-    {{/each}}
+        {{/each}}
 
-</div>
-<script src="/javascripts/voting.js">
-</script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
-<script>
-    userLocation = {
-        lat: {{problem.lat}}, 
-        lng: {{problem.lng}}
+        </div>
+        <script src="/javascripts/voting.js">
+
+        </script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
+        <script>
+            userLocation = {
+                lat: {{problem.lat }}, 
+            lng: { { problem.lng } }
     };
-    draggable = false;
-</script>
-<script type="text/javascript" src="/javascripts/map.js"></script>
-<script>
-    map.setCenter(userLocation);
-    map.setZoom(15);
-</script>
+            draggable = false;
+        </script>
+        <script type="text/javascript" src="/javascripts/map.js"></script>
+        <script>
+            map.setCenter(userLocation);
+            map.setZoom(15);
+        </script>

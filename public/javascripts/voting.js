@@ -1,12 +1,14 @@
-$('#upvote').on('click', function (e) {
+$('.upvote').on('click', function (e) {
     e.preventDefault();
-    if ($(this).hasClass('active')) {
+    var butt = $(e.target);
+    var id = $(e.target).attr("voteid");
+    if (butt.hasClass('active')) {
         $.ajax({
             type: "POST",
             url: `/resetvote/${id}`,
             success: (p) => {
-                $(this).removeClass('active');
-                $("#points").html(p);
+                butt.removeClass('active');
+                butt.siblings(".points").html(p);
             }
         });
     }
@@ -15,23 +17,25 @@ $('#upvote').on('click', function (e) {
             type: "POST",
             url: `/upvote/${id}`,
             success: (p) => {
-                $('#downvote').not(this).removeClass('active');
-                $(this).toggleClass('active');
-                $("#points").html(p);
+                butt.siblings("button").removeClass('active');
+                butt.toggleClass('active');
+                butt.siblings(".points").html(p);
             }
         });
     }
 });
 
-$('#downvote').on('click', function (e) {
+$('.downvote').on('click', function (e) {
     e.preventDefault();
-    if ($(this).hasClass('active')) {
+    var butt = $(e.target);
+    var id = $(e.target).attr("voteid");
+    if (butt.hasClass('active')) {
         $.ajax({
             type: "POST",
             url: `/resetvote/${id}`,
             success: (p) => {
-                $(this).removeClass('active');
-                $("#points").html(p);
+                butt.removeClass('active');
+                butt.siblings(".points").html(p);
             }
         });
     }
@@ -40,9 +44,9 @@ $('#downvote').on('click', function (e) {
             type: "POST",
             url: `/downvote/${id}`,
             success: (p) => {
-                $("#upvote").removeClass('active');
-                $(this).addClass('active');
-                $("#points").html(p);
+                butt.siblings("button").removeClass('active');
+                butt.addClass('active');
+                butt.siblings(".points").html(p);
             }
         });
     }
