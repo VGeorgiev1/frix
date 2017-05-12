@@ -56,8 +56,20 @@ module.exports = {
         parts.picture = `/problempictures/${finalname}`;
         parts.lng = req.body.lng;
         parts.lat = req.body.lat;
+        parts.formattedDate = "test";
 
         Problem.create(parts).then(problem => {
+            let formattedDate = problem.date.toString();
+            formattedDate = formattedDate.substr(0, formattedDate.indexOf("GMT"));
+            console.log(problem);
+            Problem.update({ _id: problem.id }, {
+                $set: {
+                    formattedDate: formattedDate
+                }
+            }, (e, p) => {
+                console.log(p);
+            });
+
             req.user.problems.push(problem.id);
             req.user.save(err => {
                 if (err) {
@@ -84,16 +96,15 @@ module.exports = {
         let id = req.params.id;
         Problem.findById(id).populate('comments').then(problem => {
             User.findById(problem.author).then(problemauthor => {
-                console.log(problemauthor);
                 if (problem.comments.length == 0) {
-                    console.log(problemauthor);
                     res.render('details', { problem, author: problemauthor });
                 }
                 problem.comments.forEach(function (comment, idx, array) {
                     User.findById(comment.author).then(commentauthor => {
                         comment.author = commentauthor;
+                        comment.formattedDate = comment.date.toString();
+                        comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
-
                             res.render('details', { problem, author: problemauthor });
                         }
                     });

@@ -8,6 +8,7 @@ let problemSchema = mongoose.Schema({
         points: {type: Number},
         author: {type: ObjectId, required: true, ref: 'User'},
         date: {type: Date, default:Date.now()},
+        formattedDate: {type: String, required: true},
         lat: {type: Number},
         lng: {type: Number},
         comments: [{type: ObjectId, ref: 'Comment'}],

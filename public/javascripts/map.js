@@ -12,7 +12,8 @@ function initMap() {
     //Map options.
     var options = {
         center: centerOfMap, //Set center.
-        zoom: 13 //The zoom value.
+        zoom: 23, //The zoom value.
+        minZoom: 10
     };
 
     //Create the map object.
@@ -58,7 +59,7 @@ function initMarker(location) {
     marker = new google.maps.Marker({
         position: location,
         map: map,
-        draggable: true //make it draggable
+        draggable: false //make it draggable
     });
     markerLocation();
     //Listen for drag events!

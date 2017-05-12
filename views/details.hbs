@@ -1,8 +1,21 @@
 <script>
     id = "{{problem.id}}";
-
 </script>
-<style>
+<style type="text/css">    
+    textarea {
+        max-width:100%;
+        width: 500px;
+    }          
+    #map {
+        width: 100%;
+        height: 450px;
+        display: block;
+        margin: auto;
+        margin-bottom: 15px;
+    }
+    .hidden {
+        display: none
+    }
     #commentBox {
         /*border-radius: 25px;
         border: 2px solid #6495ED;
@@ -14,14 +27,17 @@
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
-
-    #imgur {
-        max-width: 50%;
+    #imgur{
+        width:auto;
+        height:100%;
+        max-height:500px;
     }
-
+    img{
+        border: 1px outset grey;
+         border-radius: 2px;
+    }
     #comment,
     #descBox {
-        width: 92%;
         font-size: 1.2em;
         border: 8px outset #6495ED;
         margin-bottom: 20px;
@@ -31,21 +47,37 @@
         margin-bottom: 10px;
         border-radius: 5px;
     }
-
+    #comment{
+        padding:10px;
+    }
+    #voting{
+        font-size:1.2em;
+    }
+    #descCore{
+        font-family: "Times New Roman", Times, serif;
+        font-size:1.4em;
+    }
     .active {
         background-color: green;
         color: red;
     }
-
-    hr {
+    hr.coolLine {
         padding: 0;
         border: none;
         border-top: medium double #0000CD;
         color: #0000CD;
         text-align: center;
     }
-
-    hr:after {
+    hr{ 
+        border: 0; 
+        height: 1px; 
+        margin-top:0;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+    }
+    hr.coolLine:after {
         content: "§";
         display: inline-block;
         position: relative;
@@ -64,7 +96,8 @@
                     <tr>
                         <td>
                             <header>
-                                <h2 class="text-center" style="font-size:3.4em">{{problem.title}}</h2>
+                                <h2 class="text-center" style="font-size:3.4em;margin-bottom:0;">{{problem.title}}</h2>
+                                <hr>
                             </header>
                         </td>
                         <td align="right">
@@ -73,45 +106,49 @@
                 </table>
 
                 <div id="descBox">
-                    <div class="row">
-                        <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="70" width="80">
-                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.date}}</p>
+                    <div class="row" style="padding-bottom:20px">
+                        <img src="{{author.profpicture}}" class="col-sm-1" alt="profile pic" height="90" width="90">
+                        <p class="col-sm-3" style="font-size:0.8em"><b style="font-size:1.8em">{{author.fullName}}</b><br>{{problem.formattedDate}}</p>
                     </div>
-                    <i>Description:</i>
-                    <p>{{problem.description}}</p>
-
-                    <img src="{{problem.picture}}" id="imgur">
+                    <p id="descCore"><i>Description:</i><br>
+                    {{problem.description}}</p>
+                    <div class="row">
+                        <div class="col-sm-7"><img src="{{problem.picture}}" id="imgur"></div>
+                        <div class="col-sm-4"><div id="map"></div></div>
+                    </div>
                 </div>
                 <div style="margin-bottom:20px;">
                     {{#if user}}
+                    <b id="voting">Vote:
                     <button id="upvote">▲</button>
                     <button id="downvote">▼</button> {{/if}}
                     <span id="points">Points:{{problem.points}}</span>
+                    </b>
                 </div>
             </article>
         </div>
 
     </div>
     {{#if user}}
-    <div style="margin-bottom:50px;">
+    <div style="margin-bottom:40px;">
         <form method='post'>
-            <p style="font-size:2em;">Comment:</p>
-            <textarea class="col-l-12" name='comment' id='comment'></textarea><br />
+            <p style="font-size:1.7em;">Leave a comment:</p>
+            <textarea class="col-l-12" name='comment' id='comment' placeholder="Type here..."></textarea><br />
 
             <input type='submit' value='Submit' />
         </form>
     </div>
     {{/if}}
-    <hr>
+    <hr class="coolLine">
     <p>{{problem.comments.length}} comments</p>
     {{#each problem.comments}}
     <div class="row" style="margin-top:5px;">
-        <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="70" width="80"></span>
-        <span class="col-sm-10" style="display:inline;">
+        <span class="col-sm-1"><img src="{{this.author.profpicture}}" height="80" width="90"></span>
+        <span class="col-sm-10">
             <blockquote id="commentBox">
                 <div class="row" style="margin-bottom:5px;">
                     <b class="col-sm-3">{{this.author.fullName}}</b>
-                    <p class="col-sm-8" style="text-align:right;font-size:0.7em;">{{this.date}}</p>
+                    <p class="col-sm-8" style="text-align:right;font-size:0.7em;">{{this.formattedDate}}</p>
                 </div>
                 {{this.text}}
             </blockquote>
@@ -120,5 +157,17 @@
     {{/each}}
 </div>
 <script src="/javascripts/voting.js">
-
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
+<script>
+    userLocation = {
+        lat: {{problem.lat}}, 
+        lng: {{problem.lng}}
+    };
+    draggable = false;
+</script>
+<script type="text/javascript" src="/javascripts/map.js"></script>
+<script>
+    map.setCenter(userLocation);
+    map.setZoom(15);
 </script>
