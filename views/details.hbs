@@ -90,9 +90,6 @@
         color:black;
         text-decoration:none;
     }
-     #imgur{
-         max-width: 50%;
-     }
     a{
         color:black;
         padding-bottom:15px;
@@ -235,30 +232,26 @@
     </div>
     {{/each}}
     {{#each solutions}}
-      <div class="container body-content main">
         <div class="row">
-            <div style="overflow:auto">
-                    <article id="art">
-                        <table width="100%" >
-                            <tr>
-                                <td>
-                                    <header style="padding-bottom:0px;">
-                                        <h2><b>{{this.title}}</b></h2>
-                                        <p>Публикувано на: {{this.formattedDate}}<br>
-                                        Точки: <span id="points"><b>{{this.points}}</b></span></p>
-                                    </header>
-                                    <hr>
-                                </td>
-                            </tr>
-                        </table>
-                        <p id="desc">Описание:<br>
-                            {{this.description}}</p>
+            <article id="art">
+                <table width="100%" >
+                    <tr>
+                        <td>
+                            <header style="padding-bottom:0px;">
+                                <h2><b>{{this.title}}</b></h2>
+                                <p>Публикувано на: {{this.formattedDate}}<br>
+                                Точки: <span id="points"><b>{{this.points}}</b></span></p>
+                            </header>
+                            <hr>
+                        </td>
+                    </tr>
+                </table>
+                <p id="desc">Описание:<br>
+                    {{this.description}}</p>
 
-                        <img src="{{this.picture}}" id="imgur">
-                    </article>
-            </div>
+                <img src="{{this.picture}}" id="imgur">
+            </article>
         </div>
-      </div>
     {{/each}}
 
 </div>
