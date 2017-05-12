@@ -1,32 +1,49 @@
+<style type="text/css">
+    #map {
+        width: 70%;
+        height: 450px;
+        display: block;
+        margin: auto;
+        margin-bottom: 15px;;
+    }
+
+    .hidden {
+        display: none
+    }
+    #items{
+        align:center;
+    }
+    ul {
+        list-style-type: none;
+    }
+    .well{
+        border-radius: 5px;
+        background-color: #FFF;
+        padding:15px;
+        box-shadow: 0 0 10px darkgrey;
+        margin-bottom: 10px;
+    }
+    input[type="text"], textarea{
+        background-color:#F8F8F8
+    }
+</style>
+
 <div class="container body-content span=8 offset=2">
     <div class="well">
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/problem/create">
             <fieldset>
                  <div>
-                    <h1 class="text-center">New Problem</h1>
+                    <h1 class="text-center">Създай нов проблем</h1>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="problemTitle">Title</label>
+                    <label class="col-sm-4 control-label" for="problemTitle">Заглавие:</label>
                     <div class="col-sm-4 ">
                         <input type="text" class="form-control" id="title" placeholder="Problem Title" name="title" required>
                     </div>
                 </div>
 
                 <div id="map"></div>
-                <style type="text/css">
-                    #map {
-                        width: 70%;
-                        height: 450px;
-                        display: block;
-                        margin: auto;
-                        margin-bottom: 15px;;
-                    }
-
-                    .hidden {
-                        display: none
-                    }
-                </style>
                 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQzD3x6YorMnUkwkxzN4k5Pe0NDEFoce8"></script>
                 <script type="text/javascript" src="/javascripts/map.js"></script>
 
@@ -44,16 +61,14 @@
                     </div>
                 </div>
 
-
-
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="problemContent">Description</label>
+                    <label class="col-sm-4 control-label" for="problemContent">Описание:</label>
                     <div class="col-sm-6">
                         <textarea class="form-control" id="problemContent" rows="5" name="description" required></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="problemContent">Picture:</label>
+                    <label class="col-sm-4 control-label" for="problemContent">Снимка:</label>
                     <div class="col-sm-6">
                         <input class="form-control" id="image" type="file" name="image">
                     </div>
@@ -67,7 +82,7 @@
                     </ul>
                     </div>
                     <div class="show-more">
-                        <a>Show more tags</a>
+                        <a>Покажи още</a>
                     </div>
                     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                     <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
