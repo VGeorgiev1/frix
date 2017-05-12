@@ -14,6 +14,10 @@
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
+    #desc{
+        font-family: "Times New Roman", Times, serif;
+        font-size:1.4em;
+    }
 </style>
 <div class="container body-content">
     <div class="row">
@@ -36,7 +40,7 @@
                     </tr>
                 </table>
 
-                <p>Description:<br>
+                <p id="desc">Description:<br>
                 {{this.description}}</p>
 
                 <img src="{{this.picture}}" id="imgur">
