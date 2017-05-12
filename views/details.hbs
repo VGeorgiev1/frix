@@ -1,8 +1,4 @@
-{{#if isAuthicated}}
-<script>
-    alert("me")
-</script>
-{{/if}}
+
 
 
 <style type="text/css">
@@ -119,6 +115,7 @@
 </style>
 
 <div class="container body-content">
+
     <div class="row">
         <div class="col-md-12">
             <article>
@@ -224,10 +221,10 @@
             <p id="desc">Описание:<br> {{this.description}}
             </p>
             <img src="{{this.picture}}" id="imgur">
+            <button class="accept">Accept</button>
         </article>
-        {{#if isAuthicated}}
-        <p>Okey</p>
-        {{/if}}
+
+
         </div>
         {{/each}}
 
@@ -252,3 +249,8 @@
             map.setCenter(userLocation);
             map.setZoom(15);
         </script>
+    {{#unless isAuthenticated }}
+    <script>
+        $(".accept").css("display", "none");
+    </script>
+    {{/unless}}
