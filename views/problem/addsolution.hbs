@@ -38,7 +38,7 @@
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/problem/solution/{{id}}">
             <fieldset>
                 <div>
-                    <h1 class="text-center">Създай нов проблем</h1>
+                    <h1 class="text-center">Предложи нов проблем</h1>
                 </div>
 
                 <div class="form-group">
@@ -51,22 +51,22 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Описание:</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" id="problemContent" rows="5" name="description" required></textarea>
+                        <textarea class="form-control" id="problemContent" rows="5" name="description" style="background-color:#F8F8F8;" required></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="problemContent">Снимка:</label>
                     <div class="col-sm-6">
-                        <input class="form-control" id="image" type="file" name="image">
+                        <input class="form-control" id="image" type="file" name="image" style="background-color:#F8F8F8;">
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="text-align:center;">
                     <div class="col-sm-4 col-sm-offset-4">
 
-                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="reset" class="btn btn-default">Отмени</button>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Пупликувай</button>
                     </div>
                 </div>
 
