@@ -104,15 +104,7 @@ a, a:hover{
     color:black;
     text-decoration:none;
 }
-#art{
-    background-color:#FFF;
-    padding-left:30px;
-    padding-right:30px;
-    padding-bottom:30px;
-    box-shadow: 0 0 10px darkgrey;
-    margin-bottom: 10px;
-    width:80%;
-}
+
 #desc{
     font-family: "Times New Roman", Times, serif;
     font-size:1.4em;
