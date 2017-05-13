@@ -1,6 +1,4 @@
 <style type="text/css">
-
-
     #map {
         width: 100%;
         height: 450px;
@@ -8,11 +6,9 @@
         margin: auto;
         margin-bottom: 15px;
     }
-
     .hidden {
         display: none
     }
-
     #commentBox {
         /*border-radius: 25px;
         border: 2px solid #6495ED;
@@ -24,17 +20,14 @@
         box-shadow: 0 0 10px darkgrey;
         margin-bottom: 10px;
     }
-
     img {
         border: 1px outset grey;
         border-radius: 2px;
     }
-
     .profPic {
         height: 90px;
         width: 90px;
     }
-
     #comment,
     #descBox {
         font-size: 1.2em;
@@ -46,25 +39,22 @@
         margin-bottom: 10px;
         border-radius: 5px;
     }
-
     #comment {
         padding: 10px;
+        max-width:100%;
+        width:500px;
     }
-
     #voting {
         font-size: 1.2em;
     }
-
     #descCore {
         font-family: "Times New Roman", Times, serif;
         font-size: 1.4em;
     }
-
     .active {
         background-color: green;
         color: red;
     }
-
     hr.coolLine {
         padding: 0;
         border: none;
@@ -72,7 +62,6 @@
         color: #0000CD;
         text-align: center;
     }
-
     hr.coolLine:after {
         content: "§";
         display: inline-block;
@@ -82,7 +71,6 @@
         padding: 0 0.25em;
         background: #ECF0F1;
     }
-
     hr.fadingLine {
         border: 0;
         height: 1px;
@@ -92,7 +80,6 @@
         background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
         background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
     }
-
     hr.halfFaded {
         border: 0;
         height: 1px;
@@ -103,8 +90,6 @@
         background-image: -ms-linear-gradient(left, #8c8b8b, white, white);
         background-image: -o-linear-gradient(left, #8c8b8b, white, white);
     }
-
-
     #desc {
         font-family: "Times New Roman", Times, serif;
         font-size: 1.4em;
@@ -112,6 +97,12 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+    }
+    #imgur{
+        max-width:50%;
+    }
+    #art{
+        padding-top:4px;
     }
 </style>
 
@@ -189,46 +180,45 @@
         </span>
     </div>
     {{/each}}
-    <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p>
-    <hr class="coolLine"> {{#each solutions}}
-
-    <div class="row">
-        <article id="art">
-            <table width="100%">
-                <tr>
-                    <td>
-                        <header style="padding-bottom:0px;">
-                            <h2 style="margin-bottom:5px;font-size:2.4em;"><b>{{this.title}}</b></h2>
-                            <hr class="halfFaded">
-                            <div class="row" style="margin-top:10px;margin-bottom:0px;">
-                                <div class="col-sm-1"><img src="{{this.author.profpicture}}" class="profPic" /></div>
-                                <div class="col-sm11">
-                                    <p style="font-size:1.3em;">Публикувано на: {{this.formattedDate}}<br> Предложено от: <b>{{this.author.fullName}}</b><br>
-                                </div>
+    <hr class="coolLine">
+    <p style="font-size:1.2em;">{{problem.solutions.length}} предложени решения</p> 
+    {{#each solutions}}
+        <div class="row">
+            <article id="art">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <header style="padding-bottom:0px;">
+                                <h2 style="margin-bottom:0px;font-size:2.4em;"><b>{{this.title}}</b></h2>
+                                <hr class="halfFaded">
+                                <div class="row" style="margin-top:5px;margin-bottom:5px;">
+                                    <div class="col-sm-1"><img src="{{this.author.profpicture}}" class="profPic" /></div>
+                                    <div class="col-sm11">
+                                        <p style="font-size:1.3em;margin-bottom:0;">Публикувано на: {{this.formattedDate}}<br> Предложено от: <b>{{this.author.fullName}}</b><br></p>
+                                        <span class="votebuttons">
+                                    <span><b style="font-size:1.1em;">Гласувай:</span>
+                                        <button class="upvote" voteid="{{this.id}}">▲</button>
+                                        <button class="downvote" voteid="{{this.id}}">▼</button> Точки:
+                                        <span class="points">{{this.points}}</b></span>
+                                    </span>
+                                    </div>
                                 <div>
-                        </header>
-                        <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
-                    </td>
-                    <td>
-                        <span class="votebuttons">
-                            <span>Гласувай:</span>
-                        <button class="upvote" voteid="{{this.id}}">▲</button>
-                        <button class="downvote" voteid="{{this.id}}">▼</button> Точки:
-                        <span class="points">{{this.points}}</span>
-                        </span>
-                    </td>
-                </tr>
-            </table>
-            <p id="desc">Описание:<br> {{this.description}}
-            </p>
-            <img src="{{this.picture}}" id="imgur">
-            <form method="post" action="/problem/accept/{{this.id}}">
-            <button class="accept">Accept</button>
-            </form>
-        </article>
-
-
-        </div>
+                            </header>
+                            <hr class="halfFaded" style="margin-top:0px;margin-bottom:10px;">
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>
+                <p id="desc">Описание:<br> {{this.description}}
+                </p>
+                <img src="{{this.picture}}" id="imgur">
+                <form method="post" action="/problem/accept/{{this.id}}" style="padding-top:15px;">
+                <button class="accept">Accept</button>
+                </form>
+            </article>
+            </div>
         {{/each}}
 
         </div>
