@@ -34,18 +34,15 @@
 <div class="container body-content main" style="overflow:scroll;">
     <div class="row">
         <div class="col-sm-1">
-            <form method="post" action="/allproblems/sorted" class="left">
-            <div class="tagsWell" style="position:relative;margin=0;">
-                <legend style="font-weight:bold" class="legend">Категории</legend>
-                    <div id="tagList" class="content hideContent" tabindex="100">
+            <form method="post" action="/allproblems/sorted" class="left" style="overflow:auto">
+                <div class="tagsWell" style="position:relative;margin=0;">
+                    <legend style="font-weight:bold" class="legend">Категории</legend>
+                    <div id="tagList" class="content" tabindex="100">
                         <ul class="items">
                             {{#each tags}}
-                                <li id="menu"><input type="checkbox" name="tag" value={{this.title}}> {{this.title}}</li>
+                            <li id="menu"><input type="checkbox" name="tag" value={{this.title}} class="form-check"> {{this.title}}</li>
                             {{/each}}
                         </ul>
-                    </div>
-                    <div class="show-more">
-                        <a style="text-decoration:none;">Покажи още</a>
                     </div>
                     <hr id="tagsLines">
                     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -63,9 +60,9 @@
                     </div>
                     <hr id="tagsLines">
                     <div>
-                        <button  type="submit">Филтрирай</button>
+                        <button type="submit">Филтрирай</button>
                     </div>
-                    <hr id="tagsLines">             
+                    <hr id="tagsLines">
                 </div>
             </form>
         </div>
@@ -85,5 +82,5 @@
                     <img src="{{this.picture}}" id="imgur">
                 </article>
             {{/each}}
-        
-</div>
+        </div>
+    </div>
