@@ -186,6 +186,9 @@
                 <table width="100%">
                     <tr>
                         <td>
+                        {{#if this.accpted}}
+                        ACCEPTED SOLUTION
+                        {{/if}}
                             <header style="padding-bottom:0px;">
                                 <h2 style="margin-bottom:0px;font-size:2.4em;"><b>{{this.title}}</b></h2>
                                 <hr class="halfFaded">
@@ -213,7 +216,9 @@
                 </p>
                 <img src="{{this.picture}}" id="imgur">
                 <form method="post" action="/problem/accept/{{this.id}}" style="padding-top:15px;">
-                <button class="accept">Accept</button>
+                    {{#unless this.accpted}}
+                        <button class="accept">Accept</button>
+                    {{/unless}}
                 </form>
             </article>
             </div>
