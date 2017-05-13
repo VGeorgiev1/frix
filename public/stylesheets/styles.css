@@ -9,10 +9,10 @@ a{
     margin-bottom: 10px;
 }
 
-textarea {
+/*textarea {
         max-width:100%;
         width: 500px;
-}          
+}          */
 .hidden {
     display: none
 }
