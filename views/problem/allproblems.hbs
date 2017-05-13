@@ -1,3 +1,36 @@
+<style>
+    #art{
+        width:45%;
+        display:inline-block;
+        height: 550px;
+    }
+    #imgur{
+        position:absolute;
+        clip: rect(0px,520px,400px,0px);
+        max-width:520px;
+        max-height:400px;
+    }
+    #boxche{
+        display: -webkit-flexbox;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    .cut{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    }
+    @supports (flex-wrap: wrap) {
+        #boxche {
+        display: flex;
+    }
+}
+</style>
+
 <div class="container body-content main" style="overflow:scroll;">
     <div class="row">
         <div class="col-sm-1">
@@ -19,20 +52,21 @@
                 </div>
             </form>
         </div>
-        <div class="col-sm-11">
+    </div>
             {{#each problems}}
-            <article id="art" style="margin-top:10px;">
-                <header style="padding-bottom:0px;padding-top:5px;">
-                    <h2 style="margin-bottom:0;"><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b>{{this.title}}</b></a></h2>
-                    <p style="margin-bottom:0;">Публикувано на: {{this.formattedDate}}<br> Категория: <b>{{this.tag}}</b> Точки: <span id="points"><b>{{this.points}}</b></span></p>
-                </header>
-                <hr class="halfFaded">
+                <article id="art" style="margin-top:10px;margin-right:10px;">
+                    <header style="padding-bottom:0px;padding-top:5px;">
+                        <h2 style="margin-bottom:0;margin-top:0px;"><a href="/details/{{this.id}}" style="text-decoration:none;font-size:1.1em;"><b class="cut">{{this.title}}</b></a></h2>
+                        <p style="margin-bottom:0;">Публикувано на: {{this.formattedDate}}<br>
+                            Категория: <b>{{this.tag}}</b>     Точки: <span id="points"><b>{{this.points}}</b></span></p>
+                    </header>
+                    <hr class="halfFaded">
 
-                <p id="desc">Описание:<br> {{this.description}}
-                </p>
+                    <p id="desc">Описание:<br>
+                    {{this.description}}</p>
 
-                <img src="{{this.picture}}" id="imgur">
-            </article>
+                    <img src="{{this.picture}}" id="imgur">
+                </article>
             {{/each}}
         </div>
     </div>
