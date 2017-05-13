@@ -104,7 +104,9 @@ a, a:hover{
     color:black;
     text-decoration:none;
 }
-
+#menu:hover{
+     background-color: #dce5f4;
+}
 #desc{
     font-family: "Times New Roman", Times, serif;
     font-size:1.4em;
@@ -119,9 +121,10 @@ a, a:hover{
 }
 
 .items{
-   columns: 2;
-   column-width: 100px;
+   columns: 1;
+   column-width: 70px;
    -webkit-padding-start: 20px;
+   padding-left: 10px;
 
 }
 .hideContent {
@@ -235,12 +238,13 @@ hr.halfFaded{
     border: 0; 
     height: 1px; 
     margin-top:0;
+    margin-bottom:5px; 
     background-color:#1c2538;
 }
 .left {
     position:fixed;
     left: 0; top: 60px; bottom: 0;
-    min-width: 230px;
+    min-width: 200px;
     max-width: 25%;
 }
 .tagsWell{
@@ -263,5 +267,6 @@ li{
 }
 .legend{
     -webkit-padding-start: 10px;
-
+    padding:5px;
+    margin: 5px;
 }
