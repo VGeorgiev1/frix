@@ -60,7 +60,7 @@ module.exports = {
         let filename = filenameAndExt.substr(0, filenameAndExt.lastIndexOf('.'));
         let exten = filenameAndExt.substr(filenameAndExt.lastIndexOf('.') + 1);
 
-        let rnd = require('./../utilities/encryption').generateSalt().substr(0, 5).replace('/\//g', 'x');
+        let rnd = require('./../utilities/encryption').generateSalt().substr(0, 5).replace(/\//g, 'x');
         let finalname = `${filename}_${rnd}.${exten}`;
 
 
