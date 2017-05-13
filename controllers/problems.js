@@ -6,6 +6,7 @@ const Tags = require('mongoose').model('Tags');
 function vote(req, res, amount) {
     Problem.findOneAndUpdate({ _id: req.params.id }, { $inc: { points: amount } }, { new: true }, function (err, prob) {
         if (prob != null) {
+            console.log(prob.points);
             res.json(prob.points);
         }
     });
