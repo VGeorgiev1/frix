@@ -34,35 +34,32 @@
 <div class="container body-content main" style="overflow:scroll;">
     <div class="row">
         <div class="col-sm-1">
-            <form method="post" action="/allproblems/sorted" class="left" style="overflow:auto">
+            <form method="post" action="/allproblems/sorted" class="left form-check">
                 <div class="tagsWell" style="position:relative;margin=0;">
                     <legend style="font-weight:bold" class="legend">Категории</legend>
+                    <hr id="tagsLines">
                     <div id="tagList" class="content" tabindex="100">
                         <ul class="items">
                             {{#each tags}}
-                            <li id="menu"><input type="checkbox" name="tag" value={{this.title}} class="form-check"> {{this.title}}</li>
+                            <li id="menu"><input type="checkbox" name="tag" value={{this.title}} class="form-check-input"> {{this.title}}</li>
                             {{/each}}
                         </ul>
                     </div>
-                    <hr id="tagsLines">
-                    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                    <script type="text/javascript" src="/javascripts/showlessmore.js"></script>
                     <div>
                         <span style="font-weight:bold" class="legend">Подреди по</span>
                     </div>
                     <div>
-                        <ul id="menu">
-                            <li><input name="sortBy" type='radio' value="distance"> Близост</li>
-                            <li><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
-                            <li><input name="sortBy" type='radio' value="new"> Най-нови</li>
-                            <li><input name="sortBy" type='radio' value="old"> Най-стари</li>
+                        <ul>
+                            <li id="menu"><input name="sortBy" type='radio' value="distance"> Близост</li>
+                            <li id="menu"><input name="sortBy" type='radio' value="liked"> Най-харесвани</li>
+                            <li id="menu"><input name="sortBy" type='radio' value="new"> Най-нови</li>
+                            <li id="menu"><input name="sortBy" type='radio' value="old"> Най-стари</li>
                         </ul>
                     </div>
                     <hr id="tagsLines">
-                    <div>
-                        <button type="submit">Филтрирай</button>
+                    <div style="text-align:center">
+                        <button type="submit" class="btn btn-primary">Филтрирай</button>
                     </div>
-                    <hr id="tagsLines">
                 </div>
             </form>
         </div>
