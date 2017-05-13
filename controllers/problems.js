@@ -114,10 +114,8 @@ module.exports = {
 
             User.findById(problem.author).then(problemauthor => {
                 let isAuthenticated = false;
-                if (problem.author.id == req.user.id) {
-
-                    isAuthenticated = true;
-
+                if (req.user && problem.author.id == req.user.id) {
+                    isAuthenticated = true; 
                 }
 
                 if (problem.comments.length == 0) {
@@ -131,10 +129,14 @@ module.exports = {
                         comment.formattedDate = comment.formattedDate.substr(0, comment.formattedDate.indexOf("GMT"));
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
-                            problem.solutions.sort((a, b) => b.points - a.points);
-                            let temp = prob.solutions[prob.solutions.indexOf(prob.solutions.filter(i => i.accpted == 1)[0])];
-                            problem.solutions.splice(prob.solutions.indexOf(prob.solutions.filter(i => i.accpted == 1)[0]), 1);
-                            problem.solutions.unshift(temp);
+                            if(problem.solutions.length != 0)
+                            {
+                                                            problem.solutions.sort((a, b) => b.points - a.points);
+                            //let temp = problem.solutions[problem.solutions.indexOf(problem.solutions.filter(i => i.accpted == 1)[0])];
+                            //problem.solutions.splice(problem.solutions.indexOf(problem.solutions.filter(i => i.accpted == 1)[0]), 1);
+                            //problem.solutions.unshift(temp);
+                            
+                            }
                             res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthenticated });
                         }
                     });
