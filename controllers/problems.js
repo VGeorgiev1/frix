@@ -132,6 +132,9 @@ module.exports = {
                         if (idx === array.length - 1) {
                             problem.comments.reverse();
                             problem.solutions.sort((a, b) => b.points - a.points);
+                            let temp = prob.solutions[prob.solutions.indexOf(prob.solutions.filter(i => i.accpted == 1)[0])];
+                            problem.solutions.splice(prob.solutions.indexOf(prob.solutions.filter(i => i.accpted == 1)[0]), 1);
+                            problem.solutions.unshift(temp);
                             res.render('details', { problem, author: problemauthor, solutions: problem.solutions, isAuthenticated });
                         }
                     });
@@ -356,24 +359,22 @@ module.exports = {
             })
         })
     },
-    acceptSolutionPost: (req,res) => {
+    acceptSolutionPost: (req, res) => {
 
         Problem.findOne({
             solutions:
+            {
+                $elemMatch:
                 {
-                    $elemMatch:
-                        {
-                            _id: req.params.id
-                        }
+                    _id: req.params.id
                 }
+            }
         }, (err, prob) => {
             if (prob != null) {
                 prob.solutions[prob.solutions.indexOf(prob.solutions.filter(i => i._id == req.params.id)[0])].accpted = 1;
                 prob.save();
+                res.redirect(`/details/${prob.id}`);
             }
         });
-
-
-
     }
 };
