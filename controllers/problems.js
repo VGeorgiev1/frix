@@ -355,5 +355,25 @@ module.exports = {
                 }
             })
         })
+    },
+    acceptSolutionPost: (req,res) => {
+
+        Problem.findOne({
+            solutions:
+                {
+                    $elemMatch:
+                        {
+                            _id: req.params.id
+                        }
+                }
+        }, (err, prob) => {
+            if (prob != null) {
+                prob.solutions[prob.solutions.indexOf(prob.solutions.filter(i => i._id == req.params.id)[0])].accpted = 1;
+                prob.save();
+            }
+        });
+
+
+
     }
 };

@@ -41,4 +41,7 @@ module.exports = (app) => {
 
     app.get('/problem/solution/:id', problemController.addSolutionGet);
     app.post('/problem/solution/:id', problemController.addSolutionPost);
+
+    app.post('/problem/accept/:id', problemController.acceptSolutionPost);
+
 };

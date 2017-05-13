@@ -22,6 +22,7 @@ let problemSchema = mongoose.Schema({
         date: { type: Date, default: Date.now() },
         formattedDate: { type: String, required: true },
         comments: [{ type: ObjectId, ref: 'Comment' }],
+        accpted: Number
     }]
 });
 const Problem = mongoose.model('Prob', problemSchema);
