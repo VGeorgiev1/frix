@@ -9,24 +9,6 @@ a{
     margin-bottom: 10px;
 }
 
-#map-container {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-
-#map {
-    display: block;
-    position: absolute;
-    height: auto;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    /* adjust top margin to your header height */
-}
 textarea {
         max-width:100%;
         width: 500px;
